@@ -22,17 +22,33 @@ class TeamController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): View
     {
-        //
+        return view('teams.store');
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Handle an incoming registration request.
+     *
+     * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
-        //
+        $request->validate([
+            'team_name' => ['required', 'string', 'max:25'],
+            'short_name' => ['required', 'uppercase', 'string', 'max:3'],
+            'coach' => ['required', 'string', 'max:255'],
+            'contact_nr' => ['required', 'string', 'max:255'],
+        ]);
+
+        $team = Team::create([
+            'team_name' => $request->team_name,
+            'short_name' => $request->short_name,
+            'coach' => $request->coach,
+            'contact_nr' => $request->contact_nr,
+        ]);
+
+        return redirect(route('teams.index', absolute: false));
     }
 
     /**
