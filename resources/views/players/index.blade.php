@@ -135,11 +135,11 @@
                             @endforeach
                         </tbody>
                     </table>
-                <div class="pt-4">
-          {{ $players->links() }}
+                    <div class="pt-4">
+                        {{ $players->links() }}
+                    </div>
+                </div>
+            </div>
         </div>
-        </div>
-      </div>
     </div>
-  </div>
 </x-app-layout>

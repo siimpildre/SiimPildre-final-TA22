@@ -12,7 +12,7 @@ class PlayerController extends Controller
     public function index()
     {
         return view("players.index", [
-            "players" => Player::paginate(2),
+            "players" => Player::paginate(20),
         ]);
     }
 
