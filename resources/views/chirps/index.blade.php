@@ -19,14 +19,17 @@
             @foreach ($chirps as $chirp)
                 <div class="p-6 flex space-x-2">
                     <div class="flex-1">
-                        <div class="flex items-center">
-                            <img class="h-4 w-4" src="{{ asset('icons/basketball.svg') }}" alt="Example Icon">
-                            <div>
-                                <small class="ml-2 text-sm text-gray-600">{{ $chirp->created_at->format('j M Y, H:i') }}</small>
+                        <div class="flex justify-between items-center">
+                            <div class="flex items-center">
+                                <img class="h-4 w-4" src="{{ asset('icons/basketball.svg') }}" alt="Example Icon">
+                                <div>
+                                    <small class="ml-2 text-sm text-gray-600">{{ $chirp->created_at->format('j M Y, H:i') }}</small>
                                     @unless ($chirp->created_at->eq($chirp->updated_at))
                                     <small class="text-sm text-gray-600"> &middot; {{ __('edited') }}</small>
                                     @endunless
+                                </div>
                             </div>
+                            <div>
                             @if ($chirp->user->is(auth()->user()))
                                 <x-dropdown>
                                     <x-slot name="trigger">
@@ -40,9 +43,18 @@
                                         <x-dropdown-link :href="route('chirps.edit', $chirp)">
                                             {{ __('Muuda') }}
                                         </x-dropdown-link>
+                                    
+                                        <form method="POST" action="{{ route('chirps.destroy', $chirp) }}">
+                                            @csrf
+                                            @method('delete')
+                                            <x-dropdown-link :href="route('chirps.destroy', $chirp)" onclick="event.preventDefault(); this.closest('form').submit();">
+                                                {{ __('Kustuta') }}
+                                            </x-dropdown-link>
+                                        </form>
                                     </x-slot>
                                 </x-dropdown>
                             @endif
+                            </div>
                         </div>
                         <p class="mt-4 text-lg text-gray-900">{{ $chirp->message }}</p>
                     </div>
