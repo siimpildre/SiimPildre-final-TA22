@@ -12,6 +12,9 @@
                     <div class="mb-8">
                         <form method="POST" action="{{ route('players.store') }}">
                             @csrf
+                            <h2 class="font-semibold mt-6 text-xl text-gray-800 leading-tight">
+                                {{ __('Lisa uus mängija') }}
+                            </h2>
                             <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
 
                                 <!-- First name -->
@@ -80,7 +83,7 @@
 
                             <div class="flex items-center justify-end mt-4">
                                 <x-primary-button class="ms-4">
-                                    {{ __('Registeeri') }}
+                                    {{ __('Lisa') }}
                                 </x-primary-button>
                             </div>
                         </form>

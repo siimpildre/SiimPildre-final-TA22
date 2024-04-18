@@ -37,7 +37,7 @@ class TeamController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'team_name' => ['required', 'string', 'max:25'],
+            'team_name' => ['required', 'string', 'max:40'],
             'short_name' => ['required', 'uppercase', 'string', 'max:3'],
             'coach' => ['required', 'string', 'max:255'],
             'contact_nr' => ['required', 'string', 'max:255'],

@@ -1,19 +1,37 @@
 <x-app-layout>
-    <x-slot name="header">
+    <x-slot name="header" >
+        <div class="flex justify-between">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Töölaud') }}
         </h2>
+        <h2 id="messageDiv" class="text-gray-900 leading-tight">
+            {{ __("Oled sisse logitud!") }}
+        </h2>
+        </div>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div id="messageDiv" class="p-6 text-gray-900">
-                    {{ __("Oled sisse logitud!") }}
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 py-12 max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <a href="./teams" class="bg-white shadow-lg rounded-lg overflow-hidden">
+                <div class="px-4 py-2 bg-blue-500 text-white">
+                    <h2 class="text-lg font-bold">Meeskond</h2>
                 </div>
-            </div>
-        </div>
+                <div class="px-4 py-2">
+                    <p class="text-gray-700">Vaata ja muuda meeskonna infot siit</p>
+                </div>
+            </a>
+
+            <a href="./teams" class="bg-white shadow-lg rounded-lg overflow-hidden">
+                <div class="px-4 py-2 bg-blue-500 text-white">
+                    <h2 class="text-lg font-bold">Mängijad</h2>
+                </div>
+                <div class="px-4 py-2">
+                    <p class="text-gray-700">Vaata ja muuda mängijate infot siit</p>
+                </div>
+            </a>
     </div>
+    
+
+
 </x-app-layout>
 
 <script>
