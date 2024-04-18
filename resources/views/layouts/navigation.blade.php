@@ -21,6 +21,9 @@
                     <x-nav-link :href="route('players.index')" :active="request()->routeIs('players.index')">
                         {{ __('Mängijad') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('chirps.index')" :active="request()->routeIs('chirps.index')">
+                        {{ __('Uudised') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -81,6 +84,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('players.index')" :active="request()->routeIs('players.index')">
                 {{ __('Mängijad') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('chirps.index')" :active="request()->routeIs('chirps.index')">
+                {{ __('Chirps') }}
             </x-responsive-nav-link>
             
         </div>

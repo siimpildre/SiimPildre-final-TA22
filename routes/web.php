@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\TeamController;
-use App\Http\Controllers\NewsController;
+use App\Http\Controllers\ChirpController;
 use App\Models\Team;
 use App\Models\Player;
 
