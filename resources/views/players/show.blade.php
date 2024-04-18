@@ -1,16 +1,26 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-2xl text-gray-800 leading-tight">
             {{ $player->first_name }}
             {{ $player->last_name }}
         </h2>
+        <h2 class="font-semibold text-xl text-gray-600 leading-tight"> 
+            @if ($player->teams->count() > 0)
+            @foreach ($player->teams as $team)
+            {{ $team->team_name }}
+            @endforeach
+            @else
+                <p class="text-rose-700">Vaba mängija</p>
+            @endif
+        </h2>
+
     </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <ul>
+                    <ul class="grid grid-cols-1 lg:grid-cols-2 gap-4">
                         <li>
                         <x-input-label for="title" value="Eesnimi" />
                         {{ old('title', $player->first_name) }}
@@ -36,7 +46,7 @@
                         {{ old('title', $player->height) }}
                         </li>
                         <div class="mt-4 space-x-2">
-                            <a href="{{ route('players.index') }}">{{ __('Back') }}</a>
+                            <a href="{{ route('players.index') }}">{{ __('Tagasi') }}</a>
                         </div>
                     </ul>
                 </div>
