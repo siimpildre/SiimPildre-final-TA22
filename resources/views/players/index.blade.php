@@ -12,7 +12,7 @@
                     <div class="mb-8">
                         <form method="POST" action="{{ route('players.store') }}">
                             @csrf
-                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                            <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
 
                                 <!-- First name -->
                                 <div class="mt-4">
