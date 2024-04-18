@@ -12,8 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('teams', function (Blueprint $table) {
-            $table->softDeletes();
-            $table->timestamps();
+            if (!Schema::hasColumn('teams', 'deleted_at')) {
+                $table->timestamp('deleted_at')->nullable();
+            }
         });
     }
 
