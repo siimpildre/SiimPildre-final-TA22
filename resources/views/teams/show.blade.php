@@ -43,20 +43,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                foreach ($players as $player)
-                                <tr class="border-b justify-between items-center text-center transition duration-300 ease-in-out hover:bg-neutral-100">   
-                                    <td>
-                                        <a href="{{ route('players.show', $player) }}">
-                                            {{ $player->first_name }}
-                                        </a>
-                                    </td>
-                                    <td>{{ $player->last_name }}</td>
-                                    <td>{{ $player->jersey_nr }}</td>
-                                    <td>{{ $player->pos_nr }}</td>
-                                    <td>{{ $player->birth_date }}</td>
-                                    <td>{{ $player->height }}</td>
-                                </tr>
-                                @endforeach
+
                             </tbody>
                         </table>
                     </div>

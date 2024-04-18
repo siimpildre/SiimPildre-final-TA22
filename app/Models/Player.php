@@ -15,8 +15,8 @@ class Player extends Model
     protected $guarded = [];
 
     public $timestamps = false;
-    public function team(): BelongsToMany
+    public function teams(): BelongsToMany
     {
-        return $this->belongsToMany(Team::class);
+        return $this->belongsToMany(Team::class, 'team_players');
     }
 }

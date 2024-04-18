@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Player;
 use App\Models\Team;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Database\Eloquent\Builder;
 
 class TeamController extends Controller
 {
@@ -54,11 +56,12 @@ class TeamController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Team $team)
+    public function show(Team $team): View
     {
         return view('teams.show', [
 
             'team' => $team,
+            'players' => $team -> players
 
         ]);
     }
@@ -68,10 +71,14 @@ class TeamController extends Controller
      */
     public function edit(Team $team): View
     {
+
+        $players = Player::whereDoesntHave('teams', function (Builder $query) use ($team) {
+            $query->whereNot('team_id', $team->id);
+        })->get();
+
         return view('teams.edit', [
-
             'team' => $team,
-
+            'players' => $players,
         ]);
     }
 
@@ -101,4 +108,17 @@ class TeamController extends Controller
         $team->delete();
         return redirect('/teams');
     }
+
+    public function detachPlayer(Request $request, Team $team): RedirectResponse
+    {
+        $team->players()->detach($request->player_id);
+        return redirect()->back();
+    }
+
+    public function attachPlayer(Request $request, Team $team): RedirectResponse
+    {
+        $team->players()->attach($request->player_id);
+        return redirect()->back();
+    }
+
 }

@@ -21,7 +21,7 @@ class PlayerController extends Controller
      */
     public function create()
     {
-        //
+        return view('players.store');
     }
 
     /**
@@ -29,21 +29,40 @@ class PlayerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'first_name' => ['required', 'string', 'max:25'],
+            'last_name' => ['required', 'string', 'max:25'],
+            'jersey_nr' => ['required', 'string', 'max:3'],
+            'pos_nr' => ['required', 'string', 'max:1'],
+            'birth_date' => ['required', 'date'],
+            'height' => ['required', 'string', 'max:3'],
+        ]);
+
+        $player = Player::create([
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'jersey_nr' => $request->jersey_nr,
+            'pos_nr' => $request->pos_nr,
+            'birth_date' => $request->birth_date,
+            'height' => $request->height,
+        ]);
+
+        return redirect(route('players.index', absolute: false));
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Player $player)
+    public function show(Player $player): View
     {
         return view('players.show', [
 
             'player' => $player,
+            'teams' => $player -> teams
 
         ]);
     }
-
+    
     /**
      * Show the form for editing the specified resource.
      */
