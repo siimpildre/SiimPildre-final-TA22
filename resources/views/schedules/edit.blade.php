@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Muuda mängija infot') }}
+        {{' Muuda mängu ajakava ja detaile' }}
         </h2>
     </x-slot>
 
@@ -9,50 +9,75 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <form method="POST" action="{{ route('players.update', $player) }}">
+                    <form method="POST" action="{{ route('schedules.update', $schedule) }}">
                         @csrf
                         @method('patch')
                         <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                            <div>
-                                <x-input-label for="first_name" value="Eesnimi" />
-                                <x-text-input name="first_name" value="{{ old('first_name', $player->first_name) }}" />
-                                <x-input-error :messages="$errors->get('first_name')" class="mt-2" />
-                            </div>
-                            
-                            <div>
-                                <x-input-label for="last_name" value="Perekonnanimi" />
-                                <x-text-input name="last_name" value="{{ old('last_name', $player->last_name) }}" />
-                                <x-input-error :messages="$errors->get('last_name')" class="mt-2" />
-                            </div>
-                            
-                            <div>
-                                <x-input-label for="jersey_nr" value="Särgi number" />
-                                <x-text-input name="jersey_nr" value="{{ old('jersey_nr', $player->jersey_nr) }}" />
-                                <x-input-error :messages="$errors->get('jersey_nr')" class="mt-2" />
-                            </div>
-                            
-                            <div>
-                                <x-input-label for="pos_nr" value="Positsiooni number" />
-                                <x-text-input name="pos_nr" value="{{ old('pos_nr', $player->pos_nr) }}" />
-                                <x-input-error :messages="$errors->get('pos_nr')" class="mt-2" />
-                            </div>
-                            
-                            <div>
-                                <x-input-label for="birth_date" value="Sünniaeg" />
-                                <x-text-input name="birth_date" value="{{ old('birth_date', $player->birth_date) }}" />
-                                <x-input-error :messages="$errors->get('birth_date')" class="mt-2" />
-                            </div>
-                            
-                            <div>
-                                <x-input-label for="height" value="Pikkus" />
-                                <x-text-input name="height" value="{{ old('height', $player->height) }}" />
-                                <x-input-error :messages="$errors->get('height')" class="mt-2" />
-                            </div>
+                        <div class="mt-4">
+                            <x-input-label for="team1_id" :value="__('Meeskond 1')" />
+                            <select id="team1_id" class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" 
+                                            name="team1_id" 
+                                            :value="old('team1_id')" 
+                                            required autofocus autocomplete="team1_id">
+
+                                @foreach ($teams as $team)
+                                <option value="{{ $team->id }}" {{ $schedule->team1_id == $team->id ? 'selected' : '' }}>{{ $team->team_name }}</option>
+                                @endforeach
+
+                            </select>
+                            <select-error :messages="$errors->get('team1_id')" class="mt-2" />
+                        </div>
+
+                        <div class="mt-4">
+                            <x-input-label for="team2_id" :value="__('Meeskond 2')" />
+                            <select id="team2_id" class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" 
+                                            name="team2_id" 
+                                            :value="old('team2_id')" 
+                                            required autofocus autocomplete="team2_id">
+
+                                @foreach ($teams as $team)
+                                <option value="{{ $team->id }}" {{ $schedule->team2_id == $team->id ? 'selected' : '' }}>{{ $team->team_name }}</option>
+                                @endforeach
+
+                            </select>
+                            <select-error :messages="$errors->get('team2_id')" class="mt-2" />
+                        </div>
+
+                        <div class="mt-4">
+                            <x-input-label for="date" class="block text-gray-700">Kuupäev:</x-input-label>
+                            <x-text-input type="date" format="d/m/Y'" name="date" id="date" class="block mt-1 w-full" :value="$schedule->date" />
+                        </div>
+
+                        <div class="mt-4">
+                            <x-input-label for="time" class="block text-gray-700">Aeg:</x-input-label>
+                            <x-text-input type="time" name="time" id="time" step="60" class="form-input mt-1 block w-full" :value="$schedule->time" />
+                        </div>
+
+                        <div class="mt-4">
+                            <x-input-label for="venue" class="block text-gray-700">Asukoht:</x-input-label>
+                            <x-text-input type="text" name="venue" id="venue" class="form-input mt-1 block w-full"  :value="$schedule->venue"/>
+                        </div>
+                        <div class="mt-4">
+                            <x-input-label for="type" value="Type" />
+                            <select id="type" class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" 
+                                            name="type" 
+                                            :value="$schedule->type" 
+                                            required autofocus autocomplete="type">
+                                <option value="Põhiturniir" {{ old('type', $schedule->type) === 'Põhiturniir' ? 'selected' : '' }}>
+                                    {{ __('Põhiturniir') }}
+                                </option>
+                                <option value="Vahegrupp" {{ old('type', $schedule->type) === 'Vahegrupp' ? 'selected' : '' }}>
+                                    {{ __('Vahegrupp') }}
+                                </option>
+                                <option value="Playoff" {{ old('type', $schedule->type) === 'Playoff' ? 'selected' : '' }}>
+                                    {{ __('Playoff') }}
+                                </option>
+                            </select>
                         </div>
 
                         <div class="mt-4 space-x-2">
                             <x-primary-button>{{ __('Salvesta') }}</x-primary-button>
-                            <a href="{{ route('players.index') }}">{{ __('Tühista') }}</a>
+                            <a href="{{ route('schedules.index') }}">{{ __('Tühista') }}</a>
                         </div>
                     </form>
                 </div>

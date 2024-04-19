@@ -18,7 +18,7 @@ return new class extends Migration
             $table->date('date');
             $table->time('time');
             $table->string('venue')->nullable();
-            $table->enum('type',['Põhiturniir', 'Vahegrupp', 'Playoff']);
+            $table->string('type')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
