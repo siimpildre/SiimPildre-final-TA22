@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Response;
 
 class ScheduleController extends Controller
 {
@@ -17,7 +18,10 @@ class ScheduleController extends Controller
      */
     public function index()
     {
+        $teams = Team::all();
+        
         return view("schedules.index", [
+            'teams' => $teams,
             "schedules" => Schedule::paginate(20),
         ]);
     }
@@ -25,9 +29,12 @@ class ScheduleController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(): View
+
+    public function create()
     {
-        return view('schedules.store');
+        $teams = Team::all();
+
+        return view('schedules.store', ['teams' => $teams]);
     }
 
     /**
@@ -41,6 +48,7 @@ class ScheduleController extends Controller
             'date' => 'required|date',
             'time' => 'required',
             'venue' => 'nullable|string|max:255',
+            'type' => 'required|string|max:255',
         ]);
 
         $schedule = Schedule::create([
@@ -48,11 +56,12 @@ class ScheduleController extends Controller
             'team1_id' => $request->team1_id,
             'team2_id' => $request->team2_id,
             'date' => $request->date,
-            'time' => $$request->time,
+            'time' => $request->time,
             'venue' => $request->venue,
+            'type' => $request->type,
         ]);
 
-        return redirect(route('schedules.index', absolute: false))->with('success', 'Schedule created successfully.');
+        return redirect(route('schedules.index', absolute: false));
     }
 
     /**

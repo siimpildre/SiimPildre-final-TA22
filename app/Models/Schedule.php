@@ -12,11 +12,18 @@ class Schedule extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'team1_id', 'team2_id', 'date', 'time', 'venue',
+    ];
 
-    public function players(): BelongsToMany
+    public function team1()
     {
-        return $this->belongsToMany(Player::class, 'team_players');
+        return $this->belongsTo(Team::class, 'team1_id');
+    }
+
+    public function team2()
+    {
+        return $this->belongsTo(Team::class, 'team2_id');
     }
 
 }

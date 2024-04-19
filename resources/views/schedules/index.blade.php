@@ -8,59 +8,122 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                   <!-- <form method="POST" action="{{ route('schedule.store') }}">
-                        @csrf
-                        <h2 class="font-semibold mt-6 text-xl text-gray-800 leading-tight">
-                            {{ __('Lisa uus meeskond') }}
-                        </h2>
+                <div class="mb-8">
+                        <form method="POST" action="{{ route('schedules.store') }}">
+                            @csrf
+                            <h2 class="font-semibold mt-6 text-xl text-gray-800 leading-tight">
+                                {{ __('Lisa uus mäng') }}
+                            </h2>
+                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                                <div class="mt-4">
+                                    <x-input-label for="team1_id" :value="__('Meeskond 1')" />
+                                    <select id="team1_id" class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" 
+                                                    name="team1_id" 
+                                                    :value="old('team1_id')" 
+                                                    required autofocus autocomplete="team1_id">
 
-                    </form> -->
-                    
-                    <form method="POST" action="{{ route('schedules.store') }}">
-                        @csrf
-                        
-                        <div class="mb-4">
-                            <label for="team1_id" class="block text-gray-700">Team 1:</label>
-                            <select name="team1_id" id="team1_id" class="form-select mt-1 block w-full">
-                                <option value="">Select Team 1</option>
-                                @foreach ($teams as $team)
-                                    <option value="{{ $team->id }}">{{ $team->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                                        <option value="">{{ __('Vali meeskond 1') }}</option>
+                                        @foreach ($teams as $team)
+                                        <option value="{{ $team->id }}">{{ $team->team_name }}</option>
+                                        @endforeach
 
-                        <div class="mb-4">
-                            <label for="team2_id" class="block text-gray-700">Team 2:</label>
-                            <select name="team2_id" id="team2_id" class="form-select mt-1 block w-full">
-                                <option value="">Select Team 2</option>
-                                @foreach ($teams as $team)
-                                    <option value="{{ $team->id }}">{{ $team->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                                    </select>
+                                    <select-error :messages="$errors->get('team1_id')" class="mt-2" />
+                                </div>
 
-                        <div class="mb-4">
-                            <label for="date" class="block text-gray-700">Date:</label>
-                            <input type="date" name="date" id="date" class="form-input mt-1 block w-full" />
-                        </div>
+                                <div class="mt-4">
+                                    <x-input-label for="team2_id" :value="__('Meeskond 2')" />
+                                    <select id="team2_id" class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" 
+                                                    name="team2_id" 
+                                                    :value="old('team2_id')" 
+                                                    required autofocus autocomplete="team2_id">
 
-                        <div class="mb-4">
-                            <label for="time" class="block text-gray-700">Time:</label>
-                            <input type="time" name="time" id="time" class="form-input mt-1 block w-full" />
-                        </div>
+                                        <option value="">Vali meeskond 2</option>
+                                        @foreach ($teams as $team)
+                                        <option value="{{ $team->id }}">{{ $team->team_name }}</option>
+                                        @endforeach
 
-                        <div class="mb-4">
-                            <label for="venue" class="block text-gray-700">Venue:</label>
-                            <input type="text" name="venue" id="venue" class="form-input mt-1 block w-full" />
-                        </div>
+                                    </select>
+                                    <select-error :messages="$errors->get('team2_id')" class="mt-2" />
+                                </div>
 
-                        <div class="mt-6">
-                            <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Create Schedule</button>
-                        </div>
-                    </form>
+                                <div class="mt-4">
+                                    <x-input-label for="date" class="block text-gray-700">Kuupäev:</x-input-label>
+                                    <x-text-input type="date" format="d/m/Y'" name="date" id="date" class="block mt-1 w-full" />
+                                </div>
 
+                                <div class="mt-4">
+                                    <x-input-label for="time" class="block text-gray-700">Aeg:</x-input-label>
+                                    <x-text-input type="time" name="time" id="time" step="60" class="form-input mt-1 block w-full" />
+                                </div>
 
+                                <div class="mt-4">
+                                    <x-input-label for="venue" class="block text-gray-700">Asukoht:</x-input-label>
+                                    <x-text-input type="text" name="venue" id="venue" class="form-input mt-1 block w-full" />
+                                </div>
+                                <div class="mt-4">
+                                    <x-input-label for="type" value="Type" />
+                                    <select id="type" class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" 
+                                                    name="type" 
+                                                    :value="old('type')" 
+                                                    required autofocus autocomplete="type">
+                                        <option value="pöhiturniir">{{ __('Põhiturniir') }}</option>
+                                        <option value="vahegrupp">{{ __('Vahegrupp') }}</option>
+                                        <option value="playoff">{{ __('Playoff') }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-end mt-4">
+                                <x-primary-button class="ms-4">{{ __('Avalda mäng') }}</x-primary-button>
+                            </div>
+                        </form>
+                    </div>
+                    <table class="relative w-full">
+                        <thead class="bg-neutral-100 text-left">
+                            <tr>
+                                <th>Meeskond 1</th>
+                                <th>Meeskond 2</th>
+                                <th>Kuupäev</th>
+                                <th>Kellaaeg</th>
+                                <th>Asukoht</th>
+                                <th>Tüüp</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($schedules as $schedule)
+                            <tr class="border-b justify-between items-center text-left transition duration-300 ease-in-out hover:bg-neutral-100">
+                                <td>{{ $schedule->team1->team_name ?? 'Meeskonda ei leitud' }}</td>
+                                <td>{{ $schedule->team2->team_name ?? 'Meeskonda ei leitud' }}</td>
+                                <td>{{ date('d.m.Y', strtotime($schedule->date)) }}</td>
+                                <td>{{ date('H:i', strtotime($schedule->time)) }}</td>
+                                <td>{{ $schedule->venue }}</td>
+                                <td>{{ $schedule->type }}</td>
+                                <td>
+                                    <a class="text-green-800" href="{{ route('schedules.edit', $schedule) }}">
+                                        {{ __('Muuda') }}
+                                    </a>
+                                </td>
+                                <td>
+                                    <form method="POST" action="{{ route('schedules.destroy', $schedule) }}">
 
+                                        @csrf
+
+                                        @method('delete')
+                                        <x-danger-button class="text-red-500" onclick="event.preventDefault(); this.closest('form').submit();">
+                                            Kustuta
+                                        </x-danger-button>
+                                
+                                    </form>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    <div class="pt-4">
+                        {{ $schedules->links() }}
+                    </div>
                 </div>
              </div>
         </div>
