@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{' Muuda ' . $player->first_name . ' ' . $player->last_name . ' infot' }}
+            {{ __('Muuda mängija infot') }}
         </h2>
     </x-slot>
 

@@ -1,8 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-2xl text-gray-800 leading-tight">
-            {{ $player->first_name }}
-            {{ $player->last_name }}
+            {{ $player->first_name . ' ' . $player->last_name }}
         </h2>
         <h2 class="font-semibold text-xl text-gray-600 leading-tight"> 
             @if ($player->teams->count() > 0)

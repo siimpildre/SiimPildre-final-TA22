@@ -18,7 +18,9 @@ return new class extends Migration
             $table->date('date');
             $table->time('time');
             $table->string('venue')->nullable();
+            $table->enum('type',['Põhiturniir', 'Vahegrupp', 'Playoff']);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -28,5 +30,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('schedules');
+            $table->dropSoftDeletes();
     }
 };

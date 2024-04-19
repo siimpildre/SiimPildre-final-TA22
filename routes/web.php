@@ -26,7 +26,7 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/teams.store', [TeamController::class, 'store']);
     Route::post('/players.store', [PlayerController::class, 'store']);
-    Route::post('/schedule.store', [ScheduleController::class, 'store']);
+    Route::post('/schedules.store', [ScheduleController::class, 'store']);
 
     Route::delete('/detachplayer/{team}', [TeamController::class, 'detachPlayer'])->name('team.detach.player');
     Route::post('/attachplayer/{team}', [TeamController::class, 'attachPlayer'])->name('team.attach.player');
