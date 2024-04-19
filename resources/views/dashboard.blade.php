@@ -29,7 +29,7 @@
                 </div>
             </a>
 
-            <a href="./" class="bg-white shadow-lg rounded-lg overflow-hidden">
+            <a href="./schedules" class="bg-white shadow-lg rounded-lg overflow-hidden">
                 <div class="px-4 py-2 bg-blue-500 text-white">
                     <h2 class="text-lg font-bold">Ajakava</h2>
                 </div>
@@ -38,7 +38,7 @@
                 </div>
             </a>
 
-            <a href="./" class="bg-white shadow-lg rounded-lg overflow-hidden">
+            <a href="./chirps" class="bg-white shadow-lg rounded-lg overflow-hidden">
                 <div class="px-4 py-2 bg-blue-500 text-white">
                     <h2 class="text-lg font-bold">Uudised</h2>
                 </div>

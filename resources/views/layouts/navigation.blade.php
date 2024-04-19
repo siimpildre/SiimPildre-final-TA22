@@ -24,6 +24,9 @@
                     <x-nav-link :href="route('chirps.index')" :active="request()->routeIs('chirps.index')">
                         {{ __('Uudised') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('schedules.index')" :active="request()->routeIs('schedules.index')">
+                        {{ __('Ajakava') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -87,6 +90,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('chirps.index')" :active="request()->routeIs('chirps.index')">
                 {{ __('Uudised') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('schedules.index')" :active="request()->routeIs('schedules.index')">
+                {{ __('Ajakava') }}
             </x-responsive-nav-link>
             
         </div>
