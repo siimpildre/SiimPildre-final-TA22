@@ -1,54 +1,54 @@
 # SiimPildre-final-TA22
 Siim Pildre thesis project TA-22
 
-#Overview
+# Overview
 New homepage for Saare Spordiselts MTÜ for managing local basketball tournament.
 It is a web application built using the Laravel PHP framework with Blade templating engine and Tailwind CSS utility-first framework.
 
-Installation
+# Installation
 
 1. Clone the repository to your local machine:
 
-    git clone <repository-url>
+        git clone <repository-url>
 
-2. Navigate to the project directory:
+4. Navigate to the project directory:
 
-    cd SiimPildre-final-TA22
+        cd SiimPildre-final-TA22
 
-3. Install Composer dependencies:
+5. Install Composer dependencies:
 
-    composer install
+        composer install
 
-4. Install NPM dependencies:
+6. Install NPM dependencies:
 
-    npm install
+        npm install
 
-5. Copy the .env.example file to .env and configure your environment variables:
+7. Copy the .env.example file to .env and configure your environment variables:
 
-    cp .env.example .env
+        cp .env.example .env
 
-6. Generate an application key:
+8. Generate an application key:
 
-    php artisan key:generate
+        php artisan key:generate
 
-7. Run database migrations and seeders:
+9. Run database migrations and seeders:
 
-    php artisan migrate --seed
+        php artisan migrate --seed
 
-8. Start the development server:
-   
-    php artisan serve
+10. Start the development server:
 
-9. Compile your project's assets:
+        php artisan serve
 
-  npm run dev
+11. Compile your project's assets:
 
-11. Visit http://localhost:8000 in your web browser to view the application.
+        npm run dev
+
+12. Visit http://localhost:8000 in your web browser to view the application.
 
 
-#Usage
+# Usage
 
     The application allows users to make teams, add players and make a schedule with statistics of each game.
 
 
-For any inquiries or issues, please contact me through github .
+For any inquiries or issues, please contact SiimPildre through github .
