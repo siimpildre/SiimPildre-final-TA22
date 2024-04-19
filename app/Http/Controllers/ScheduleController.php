@@ -34,7 +34,9 @@ class ScheduleController extends Controller
     {
         $teams = Team::all();
 
-        return view('schedules.store', ['teams' => $teams]);
+        return view('schedules.store', [
+            'teams' => $teams
+        ]);
     }
 
     /**
@@ -48,11 +50,10 @@ class ScheduleController extends Controller
             'date' => 'required|date',
             'time' => 'required',
             'venue' => 'nullable|string|max:255',
-            'type' => 'required|string|max:255',
+            'type' => 'nullable|string|max:255',
         ]);
 
         $schedule = Schedule::create([
-            'team_name' => $request->team_name,
             'team1_id' => $request->team1_id,
             'team2_id' => $request->team2_id,
             'date' => $request->date,
@@ -80,17 +81,34 @@ class ScheduleController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Schedule $schedule)
+    public function edit(Schedule $schedule): View
     {
-        //
+        $teams = Team::all();
+
+        return view('schedules.edit', [
+
+            'schedule' => $schedule,
+            'teams' => $teams
+
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Schedule $schedule)
+    public function update(Request $request, Schedule $schedule): RedirectResponse
     {
-        //
+
+        $validated = $request->validate([
+
+            'team1_id' => 'required|exists:teams,id',
+            'team2_id' => 'required|exists:teams,id|different:team1_id',
+
+        ]);
+
+        $schedule->update($validated);
+
+        return redirect(route('schedules.index'));
     }
 
     /**
@@ -98,6 +116,7 @@ class ScheduleController extends Controller
      */
     public function destroy(Schedule $schedule)
     {
-        //
+        $schedule->delete();
+        return redirect('/schedules');
     }
 }

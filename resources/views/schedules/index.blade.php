@@ -64,12 +64,11 @@
                                 <div class="mt-4">
                                     <x-input-label for="type" value="Type" />
                                     <select id="type" class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" 
-                                                    name="type" 
-                                                    :value="old('type')" 
-                                                    required autofocus autocomplete="type">
-                                        <option value="pöhiturniir">{{ __('Põhiturniir') }}</option>
-                                        <option value="vahegrupp">{{ __('Vahegrupp') }}</option>
-                                        <option value="playoff">{{ __('Playoff') }}</option>
+                                            name="type" 
+                                            required autofocus autocomplete="type">
+                                        <option value="Põhiturniir">{{ __('Põhiturniir') }}</option>
+                                        <option value="Vahegrupp">{{ __('Vahegrupp') }}</option>
+                                        <option value="Playoff">{{ __('Playoff') }}</option>
                                     </select>
                                 </div>
                             </div>

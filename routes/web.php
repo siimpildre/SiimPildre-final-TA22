@@ -22,7 +22,6 @@ Route::middleware('auth')->group(function () {
     Route::resource("teams", TeamController::class);
     Route::resource("players", PlayerController::class);
     Route::resource("schedules", ScheduleController::class);
-    
 
     Route::post('/teams.store', [TeamController::class, 'store']);
     Route::post('/players.store', [PlayerController::class, 'store']);
@@ -30,9 +29,6 @@ Route::middleware('auth')->group(function () {
 
     Route::delete('/detachplayer/{team}', [TeamController::class, 'detachPlayer'])->name('team.detach.player');
     Route::post('/attachplayer/{team}', [TeamController::class, 'attachPlayer'])->name('team.attach.player');
-
-    Route::delete('/detachteam/{schedule}', [ScheduleController::class, 'detachTeam'])->name('schedule.detach.team');
-    Route::post('/attachteam/{schedule}', [ScheduleController::class, 'attachTeam'])->name('schedule.attach.team');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
