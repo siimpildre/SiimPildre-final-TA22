@@ -71,10 +71,10 @@
                             <tr>
                                 <th>Meeskonnanimi</th>
                                 <th>Lühend</th>
-                                <th>Treener</th>
-                                <th>Kontakt</th>
+                                <th class="hidden lg:table-cell">Treener</th>
+                                <th class="hidden lg:table-cell">Kontakt</th>
                                 <th></th>
-                                <th></th>
+                                <th class="hidden lg:table-cell"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -86,14 +86,14 @@
                                     </a>
                                 </td>
                                 <td>{{ $team->short_name }}</td>
-                                <td>{{ $team->coach }}</td>
-                                <td>{{ $team->contact_nr }}</td>
+                                <td class="hidden lg:table-cell">{{ $team->coach }}</td>
+                                <td class="hidden lg:table-cell">{{ $team->contact_nr }}</td>
                                 <td>
                                     <a class="text-green-800" href="{{ route('teams.edit', $team) }}">
                                         {{ __('Muuda') }}
                                     </a>
                                 </td>
-                                <td>
+                                <td class="hidden lg:table-cell">
                                     <form method="POST" action="{{ route('teams.destroy', $team) }}">
 
                                         @csrf

@@ -72,10 +72,21 @@
                             <x-primary-button>
                                 {{ __('Lisa') }}
                             </x-primary-button>
+                            <a href="{{ route('teams.index') }}">{{ __('Tagasi') }}</a>
                         </div>
                     </form>
+
                     <div class="mt-4 space-x-2">
-                        <a href="{{ route('teams.index') }}">{{ __('Tagasi') }}</a>
+                        <form method="POST" action="{{ route('teams.destroy', $team) }}">
+
+                            @csrf
+
+                            @method('delete')
+                            <x-danger-button class="text-red-500" onclick="event.preventDefault(); this.closest('form').submit();">
+                                Kustuta meeskond
+                            </x-danger-button>
+
+                        </form>
                     </div>
                 </div>
             </div>

@@ -83,11 +83,11 @@
                                 <th>Meeskond 1</th>
                                 <th>Meeskond 2</th>
                                 <th>Kuupäev</th>
-                                <th>Kellaaeg</th>
-                                <th>Asukoht</th>
-                                <th>Tüüp</th>
-                                <th></th>
-                                <th></th>
+                                <th class="hidden lg:table-cell">Kellaaeg</th>
+                                <th class="hidden lg:table-cell">Asukoht</th>
+                                <th class="hidden lg:table-cell">Tüüp</th>
+                                <th ></th>
+                                <th class="hidden lg:table-cell"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -96,15 +96,15 @@
                                 <td>{{ $schedule->team1->team_name ?? 'Meeskonda ei leitud' }}</td>
                                 <td>{{ $schedule->team2->team_name ?? 'Meeskonda ei leitud' }}</td>
                                 <td>{{ date('d.m.Y', strtotime($schedule->date)) }}</td>
-                                <td>{{ date('H:i', strtotime($schedule->time)) }}</td>
-                                <td>{{ $schedule->venue }}</td>
-                                <td>{{ $schedule->stages }}</td>
+                                <td class="hidden lg:table-cell">{{ date('H:i', strtotime($schedule->time)) }}</td>
+                                <td class="hidden lg:table-cell">{{ $schedule->venue }}</td>
+                                <td class="hidden lg:table-cell">{{ $schedule->stages }}</td>
                                 <td>
                                     <a class="text-green-800" href="{{ route('schedules.edit', $schedule) }}">
                                         {{ __('Muuda') }}
                                     </a>
                                 </td>
-                                <td>
+                                <td class="hidden lg:table-cell">
                                     <form method="POST" action="{{ route('schedules.destroy', $schedule) }}">
 
                                         @csrf

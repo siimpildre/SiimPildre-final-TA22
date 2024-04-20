@@ -93,11 +93,11 @@
                             <th>Eesnimi</th>
                             <th>Perekonnanimi</th>
                             <th>Särgi number</th>
-                            <th>Positsiooni number</th>
-                            <th>Sünniaeg</th>
-                            <th>Pikkus</th>
-                            <th></th>
-                            <th></th>
+                            <th class="hidden lg:table-cell">Positsiooni number</th>
+                            <th class="hidden lg:table-cell">Sünniaeg</th>
+                            <th class="hidden lg:table-cell">Pikkus</th>
+                            <th ></th>
+                            <th class="hidden lg:table-cell"></th>
                         </tr>
                         </thead>
                     <tbody>
@@ -110,15 +110,15 @@
                             </td>
                             <td>{{ $player->last_name }}</td>
                             <td>{{ $player->jersey_nr }}</td>
-                            <td>{{ $player->pos_nr }}</td>
-                            <td>{{ $player->birth_date }}</td>
-                            <td>{{ $player->height }}</td>
-                            <td>
+                            <td class="hidden lg:table-cell">{{ $player->pos_nr }}</td>
+                            <td class="hidden lg:table-cell">{{ $player->birth_date }}</td>
+                            <td class="hidden lg:table-cell">{{ $player->height }}</td>
+                            <td >
                                 <a class="text-green-800" href="{{ route('players.edit', $player) }}">
                                     {{ __('Muuda') }}
                                 </a>
                             </td>
-                            <td>
+                            <td class="hidden lg:table-cell">
                                 <form method="POST" action="{{ route('players.destroy', $player) }}">
 
                                     @csrf

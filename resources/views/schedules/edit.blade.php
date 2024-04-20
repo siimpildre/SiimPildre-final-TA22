@@ -81,6 +81,17 @@
                             <a href="{{ route('schedules.index') }}">{{ __('Tühista') }}</a>
                         </div>
                     </form>
+                    <div class="mt-4 space-x-2">
+                        <form method="POST" action="{{ route('schedules.destroy', $schedule) }}">
+                            @csrf
+
+                            @method('delete')
+                            <x-danger-button class="text-red-500" onclick="event.preventDefault(); this.closest('form').submit();">
+                                Kustuta mäng
+                            </x-danger-button>
+                    
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
