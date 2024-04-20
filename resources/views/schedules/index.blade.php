@@ -19,8 +19,7 @@
                                     <x-input-label for="team1_id" :value="__('Meeskond 1')" />
                                     <select id="team1_id" class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" 
                                                     name="team1_id" 
-                                                    :value="old('team1_id')" 
-                                                    required autofocus autocomplete="team1_id">
+                                                    :value="old('team1_id')">
 
                                         <option value="">{{ __('Vali meeskond 1') }}</option>
                                         @foreach ($teams as $team)
@@ -28,15 +27,14 @@
                                         @endforeach
 
                                     </select>
-                                    <select-error :messages="$errors->get('team1_id')" class="mt-2" />
+                                    <x-input-error :messages="$errors->get('team1_id')" class="mt-2" />
                                 </div>
 
                                 <div class="mt-4">
                                     <x-input-label for="team2_id" :value="__('Meeskond 2')" />
                                     <select id="team2_id" class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" 
                                                     name="team2_id" 
-                                                    :value="old('team2_id')" 
-                                                    required autofocus autocomplete="team2_id">
+                                                    :value="old('team2_id')" >
 
                                         <option value="">Vali meeskond 2</option>
                                         @foreach ($teams as $team)
@@ -44,28 +42,30 @@
                                         @endforeach
 
                                     </select>
-                                    <select-error :messages="$errors->get('team2_id')" class="mt-2" />
+                                    <x-input-error :messages="$errors->get('team2_id')" class="mt-2" />
                                 </div>
 
                                 <div class="mt-4">
                                     <x-input-label for="date" class="block text-gray-700">Kuupäev:</x-input-label>
-                                    <x-text-input type="date" format="d/m/Y'" name="date" id="date" class="block mt-1 w-full" />
+                                    <x-text-input type="date" format="d/m/Y'" name="date" id="date" class="block mt-1 w-full" :value="old('date')"/>
+                                    <x-input-error :messages="$errors->get('date')" class="mt-2" />
                                 </div>
 
                                 <div class="mt-4">
                                     <x-input-label for="time" class="block text-gray-700">Aeg:</x-input-label>
-                                    <x-text-input type="time" name="time" id="time" step="60" class="form-input mt-1 block w-full" />
+                                    <x-text-input type="time" name="time" id="time" step="60" class="form-input mt-1 block w-full"  :value="old('time')"/>
+                                    <x-input-error :messages="$errors->get('time')" class="mt-2" />
                                 </div>
 
                                 <div class="mt-4">
                                     <x-input-label for="venue" class="block text-gray-700">Asukoht:</x-input-label>
-                                    <x-text-input type="text" name="venue" id="venue" class="form-input mt-1 block w-full" />
+                                    <x-text-input type="text" name="venue" id="venue" class="form-input mt-1 block w-full" :value="old('venue')"/>
                                 </div>
                                 <div class="mt-4">
-                                    <x-input-label for="type" value="Type" />
-                                    <select id="type" class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" 
-                                            name="type" 
-                                            required autofocus autocomplete="type">
+                                    <x-input-label for="stages" value="Tüüp" />
+                                    <select id="stages" class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" 
+                                            name="stages" 
+                                            :value="old('stages')">
                                         <option value="Põhiturniir">{{ __('Põhiturniir') }}</option>
                                         <option value="Vahegrupp">{{ __('Vahegrupp') }}</option>
                                         <option value="Playoff">{{ __('Playoff') }}</option>
@@ -98,7 +98,7 @@
                                 <td>{{ date('d.m.Y', strtotime($schedule->date)) }}</td>
                                 <td>{{ date('H:i', strtotime($schedule->time)) }}</td>
                                 <td>{{ $schedule->venue }}</td>
-                                <td>{{ $schedule->type }}</td>
+                                <td>{{ $schedule->stages }}</td>
                                 <td>
                                     <a class="text-green-800" href="{{ route('schedules.edit', $schedule) }}">
                                         {{ __('Muuda') }}

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->date('date');
             $table->time('time');
             $table->string('venue')->nullable();
-            $table->string('type')->nullable();
+            $table->string('stages');
             $table->timestamps();
             $table->softDeletes();
         });

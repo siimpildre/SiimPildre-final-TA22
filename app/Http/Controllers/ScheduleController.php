@@ -45,12 +45,19 @@ class ScheduleController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'team1_id' => 'required|exists:teams,id',
-            'team2_id' => 'required|exists:teams,id|different:team1_id',
-            'date' => 'required|date',
-            'time' => 'required',
-            'venue' => 'nullable|string|max:255',
-            'type' => 'nullable|string|max:255',
+            'team1_id' => ['required', 'exists:teams,id'],
+            'team2_id' => ['required', 'exists:teams,id', 'different:team1_id'],
+            'date' => ['required', 'date'],
+            'time' => ['required'],
+            'venue' => ['nullable', 'string', 'max:255'],
+            'stages' => ['required', 'string'],
+        ],[
+            'team1_id.required' => 'Vali meeskond 1',
+            'team2_id.required' => 'Vali meeskond 2',
+            'team2_id.different' => 'Vali erinevad meeskonnad',
+            'date.required' => 'Määra mängu kuupäev',
+            'time.required' => 'Vali mängu alguskellaeg',
+            'stages.required' => 'Määra mängu etapp',
         ]);
 
         $schedule = Schedule::create([
@@ -59,8 +66,9 @@ class ScheduleController extends Controller
             'date' => $request->date,
             'time' => $request->time,
             'venue' => $request->venue,
-            'type' => $request->type,
+            'stages' => $request->stages,
         ]);
+
 
         return redirect(route('schedules.index', absolute: false));
     }
@@ -88,7 +96,7 @@ class ScheduleController extends Controller
         return view('schedules.edit', [
 
             'schedule' => $schedule,
-            'teams' => $teams
+            'teams' => $teams,
 
         ]);
     }
@@ -101,9 +109,21 @@ class ScheduleController extends Controller
 
         $validated = $request->validate([
 
-            'team1_id' => 'required|exists:teams,id',
+            'team1_id' => 'required|exists:teams,id|different:team2_id',
             'team2_id' => 'required|exists:teams,id|different:team1_id',
+            'date' => 'required|date',
+            'time' => 'required',
+            'venue' => 'nullable|string|max:255',
+            'stages' => 'required|string',
 
+        ],[
+            'team1_id.required' => 'Vali meeskond 1',
+            'team2_id.required' => 'Vali meeskond 2',
+            'team1_id.different' => 'Vali erinevad meeskonnad',
+            'team2_id.different' => 'Vali erinevad meeskonnad',
+            'date.required' => 'Määra mängu kuupäev',
+            'time.required' => 'Vali mängu alguskellaeg',
+            'stages.required' => 'Määra mängu etapp',
         ]);
 
         $schedule->update($validated);

@@ -33,9 +33,17 @@ class PlayerController extends Controller
             'first_name' => ['required', 'string', 'max:25'],
             'last_name' => ['required', 'string', 'max:25'],
             'jersey_nr' => ['required', 'string', 'max:3'],
-            'pos_nr' => ['required', 'string', 'max:1'],
+            'pos_nr' => ['required', 'string', 'between:1,5'],
             'birth_date' => ['required', 'date'],
             'height' => ['required', 'string', 'max:3'],
+        ],
+        [
+            'first_name.required' => 'Eesnimi on vajalik',
+            'last_name.required' => 'Perekonnanimi on vajalik',
+            'pos_nr.required' => 'Sisesta positsiooni number 1-5',
+            'birth_date.required' => 'Sisesta sünniaeg',
+            'height.required' => 'Sisesta mängija pikkus',
+            'height.max' => 'Kas tõesti on mängija nii pikk?',
         ]);
 
         $player = Player::create([
@@ -85,16 +93,18 @@ class PlayerController extends Controller
 
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
-            'jersey_nr' => 'required|string|max:255',
-            'pos_nr' => 'required|string|between:0,6',
+            'jersey_nr' => 'string|max:255',
+            'pos_nr' => 'required|string|between:1,5',
             'birth_date' => 'required|string|max:255',
             'height' => 'required|string|max:255',
             
         ],
         [
-            // 'release_date.required' => 'The release year field is required',
-            // 'release_date.between' => 'The release year field must be between 1901 and 2155'
-
+            'first_name.required' => 'Eesnimi on vajalik',
+            'last_name.required' => 'Perekonnanimi on vajalik',
+            'pos_nr.required' => 'Sisesta positsiooni number 1-5',
+            'birth_date.required' => 'Sisesta sünniaeg',
+            'height.required' => 'Sisesta mängija pikkus',
         ]);
 
         $player->update($validated);

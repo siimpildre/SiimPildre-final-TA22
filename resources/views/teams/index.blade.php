@@ -22,8 +22,7 @@
                                 <x-text-input id="team_name" class="block mt-1 w-full" 
                                                 type="text" 
                                                 name="team_name" 
-                                                :value="old('team_name')" 
-                                                required autofocus autocomplete="team_name" />
+                                                :value="old('team_name')"/>
                                 <x-input-error :messages="$errors->get('team_name')" class="mt-2" />
                             </div>
 
@@ -33,8 +32,7 @@
                                 <x-text-input id="short_name" class="block mt-1 w-full" 
                                                 type="text" 
                                                 name="short_name" 
-                                                :value="old('short_name')" 
-                                                required autocomplete="short_name" />
+                                                :value="old('short_name')"/>
                                 <x-input-error :messages="$errors->get('short_name')" class="mt-2" />
                             </div>
 
@@ -45,8 +43,8 @@
                                 <x-text-input id="coach" class="block mt-1 w-full"
                                                 type="text"
                                                 name="coach"
-                                                required autocomplete="coach" />
-                                <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                                                :value="old('coach')"/>
+                                <x-input-error :messages="$errors->get('coach')" class="mt-2" />
                             </div>
 
                             <!-- Contact number -->
@@ -55,7 +53,8 @@
 
                                 <x-text-input id="contact_nr" class="block mt-1 w-full"
                                                 type="tel"
-                                                name="contact_nr" required autocomplete="contact_nr" />
+                                                name="contact_nr"
+                                                :value="old('contact_nr')"/>
                                 <x-input-error :messages="$errors->get('contact_nr')" class="mt-2" />
                             </div>
                         </div>

@@ -13,7 +13,7 @@ class Schedule extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'team1_id', 'team2_id', 'date', 'time', 'venue',
+        'team1_id', 'team2_id', 'date', 'time', 'venue', 'stages',
     ];
 
     public function team1()
