@@ -25,7 +25,7 @@
                         <form method="GET" action="{{ route('statistics.create') }}">
                             <div class="mt-4">
                                 <x-input-label for="schedule_id" :value="__('Vali mäng')" />
-                                <select id="schedule_id" class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" 
+                                <select id="schedule_id" class="block mt-1 w-full border-gray-300 focus:border-orange-500/75 focus:ring-orange-500/75 rounded-md shadow-sm" 
                                         name="schedule_id" required autofocus>
                                     <option value="">vali mäng</option>
                                     @foreach ($schedules as $schedule)

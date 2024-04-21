@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        {{ 'Statistika: ' . $schedule->team1->team_name . ' vs ' . $schedule->team2->team_name . ' ' . $schedule->date }}
+        {{ 'Statistika: ' . $schedules->team1->team_name . ' vs ' . $schedules->team2->team_name . ' ' . $schedule->date }}
         </h2>
     </x-slot>
     <div class="py-12">
