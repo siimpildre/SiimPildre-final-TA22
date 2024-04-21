@@ -27,9 +27,9 @@
                                 <x-input-label for="schedule_id" :value="__('Vali mäng')" />
                                 <select id="schedule_id" class="block mt-1 w-full border-gray-300 focus:border-orange-500/75 focus:ring-orange-500/75 rounded-md shadow-sm" 
                                         name="schedule_id" required autofocus>
-                                    <option value="">vali mäng</option>
+                                    <option value="">Mis mängu soovid?</option>
                                     @foreach ($schedules as $schedule)
-                                        <option value="{{ $schedule->id }}">{{ $schedule->team1->team_name }} vs {{ $schedule->team2->team_name }} - {{ $schedule->date }}</option>
+                                        <option value="{{ $schedule->id }}">{{ $schedule->team1->team_name }} vs {{ $schedule->team2->team_name }} - {{ date('d.m.Y', strtotime($schedule->date)) }}</option>
                                     @endforeach
                                 </select>
                                 <x-input-error :messages="$errors->get('schedule_id')" class="mt-2" />

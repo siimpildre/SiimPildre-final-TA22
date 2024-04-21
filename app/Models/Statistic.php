@@ -13,7 +13,7 @@ class Statistic extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'schedule_id', 'team_id', 'player_id', 'points', 'game_jersey_nr', 'played', '3-p', 'free_t', 'free_m', 'fouls', 'techincals', 'unsportsman', 
+        'schedule_id', 'team_id', 'player_id', 'game_jersey_nr', 'played', '3-p', 'free_t', 'free_m', 'fouls', 'techincals', 'unsportsman', 'points',
     ];
 
     public function schedule()
