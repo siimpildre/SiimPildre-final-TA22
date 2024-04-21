@@ -11,39 +11,47 @@
     </x-slot>
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 py-12 max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <a href="./teams" class="bg-white shadow-lg rounded-lg overflow-hidden">
-                <div class="px-4 py-2 bg-blue-500 text-white">
+            <a href="./teams" class="bg-orange-600 hover:bg-orange-700 shadow-lg rounded-lg overflow-hidden text-gray-600 hover:text-gray-800">
+                <div class="px-4 py-2  text-white">
                     <h2 class="text-lg font-bold">Meeskonnad</h2>
                 </div>
-                <div class="px-4 py-2">
-                    <p class="text-gray-700">Vaata ja muuda meeskonna infot siit</p>
+                <div class="px-4 py-2 bg-white">
+                    <p>Vaata ja muuda meeskonna infot</p>
                 </div>
             </a>
 
-            <a href="./players" class="bg-white shadow-lg rounded-lg overflow-hidden">
-                <div class="px-4 py-2 bg-blue-500 text-white">
+            <a href="./players" class="bg-orange-600 hover:bg-orange-700 shadow-lg rounded-lg overflow-hidden text-gray-600 hover:text-gray-800">
+                <div class="px-4 py-2  text-white">
                     <h2 class="text-lg font-bold">Mängijad</h2>
                 </div>
-                <div class="px-4 py-2">
-                    <p class="text-gray-700">Vaata ja muuda mängijate infot siit</p>
+                <div class="px-4 py-2 bg-white">
+                    <p>Vaata ja muuda mängijate infot</p>
                 </div>
             </a>
 
-            <a href="./schedules" class="bg-white shadow-lg rounded-lg overflow-hidden">
-                <div class="px-4 py-2 bg-blue-500 text-white">
+            <a href="./schedules" class="bg-orange-600 hover:bg-orange-700 shadow-lg rounded-lg overflow-hidden text-gray-600 hover:text-gray-800">
+                <div class="px-4 py-2 text-white">
                     <h2 class="text-lg font-bold">Ajakava</h2>
                 </div>
-                <div class="px-4 py-2">
-                    <p class="text-gray-700">Vaata ja muuda ajakava</p>
+                <div class="px-4 py-2 bg-white">
+                    <p>Vaata ja muuda ajakava</p>
                 </div>
             </a>
 
-            <a href="./chirps" class="bg-white shadow-lg rounded-lg overflow-hidden">
-                <div class="px-4 py-2 bg-blue-500 text-white">
+            <a href="./chirps" class="bg-orange-600 hover:bg-orange-700 shadow-lg rounded-lg overflow-hidden text-gray-600 hover:text-gray-800">
+                <div class="px-4 py-2  text-white">
                     <h2 class="text-lg font-bold">Uudised</h2>
                 </div>
-                <div class="px-4 py-2">
-                    <p class="text-gray-700">vaata või loo uusi uudiseid</p>
+                <div class="px-4 py-2 bg-white">
+                    <p>Vaata või loo uusi uudiseid</p>
+                </div>
+            </a>
+            <a href="./statistics" class="bg-orange-600 hover:bg-orange-700 shadow-lg rounded-lg overflow-hidden text-gray-600 hover:text-gray-800">
+                <div class="px-4 py-2 text-white">
+                    <h2 class="text-lg font-bold">Statistika</h2>
+                </div>
+                <div class="px-4 py-2 bg-white">
+                    <p>Sisesta või muuda mängude statistikat</p>
                 </div>
             </a>
 
