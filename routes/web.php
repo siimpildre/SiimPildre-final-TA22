@@ -26,6 +26,8 @@ Route::middleware('auth')->group(function () {
     Route::resource("schedules", ScheduleController::class);
     Route::resource("statistics", StatisticController::class);
 
+    Route::get('/statistics/create', [StatisticController::class, 'create'])->name('statistics.create');
+
     Route::post('/teams.store', [TeamController::class, 'store']);
     Route::post('/players.store', [PlayerController::class, 'store']);
     Route::post('/schedules.store', [ScheduleController::class, 'store']);

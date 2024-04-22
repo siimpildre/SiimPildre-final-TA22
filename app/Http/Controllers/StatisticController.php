@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Statistic;
-use Illuminate\Http\Request;
 use App\Models\Player;
 use App\Models\Team;
 use App\Models\Schedule;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
 
 class StatisticController extends Controller
 {
@@ -31,14 +31,18 @@ class StatisticController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        $teams = Team::all();
-        $schedules = Schedule::all();
-
+        $scheduleId = $request->query('schedule_id');
+        $schedule = Schedule::findOrFail($scheduleId);
+    
+        $team1Players = $schedule->team1->players;
+        $team2Players = $schedule->team2->players;
+    
         return view('statistics.create', [
-            'teams' => $teams,
-            'schedules' => $schedules,
+            'schedule' => $schedule,
+            'team1Players' => $team1Players,
+            'team2Players' => $team2Players,
         ]);
     }
 
@@ -48,32 +52,35 @@ class StatisticController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'team1_id' => ['required', 'exists:teams,id'],
-            'team2_id' => ['required', 'exists:teams,id', 'different:team1_id'],
-            'date' => ['required', 'date'],
-            'time' => ['required'],
-            'venue' => ['nullable', 'string', 'max:255'],
-            'stages' => ['required', 'string'],
+            'statistics' => ['required', 'array'],
+            'statistics.*.schedule_id' => ['required', 'exists:schedules,id'],
+            'statistics.*.team_id' => ['required', 'exists:teams,id'],
+            'statistics.*.player_id' => ['required', 'exists:players,id'],
+            'statistics.*.game_jersey_nr' => ['required', 'string'],
+            'statistics.*.played' => ['string'],
+            'statistics.*.3-p' => ['integer'],
+            'statistics.*.free_t' => ['integer'],
+            'statistics.*.free_m' => ['integer'],
+            'statistics.*.fouls' => ['integer'],
+            'statistics.*.techincals' => ['integer'],
+            'statistics.*.unsportsman' => ['integer'],
+            'statistics.*.points' => ['integer'],
         ],[
-            'team1_id.required' => 'Vali meeskond 1',
-            'team2_id.required' => 'Vali meeskond 2',
-            'team2_id.different' => 'Vali erinevad meeskonnad',
-            'date.required' => 'Määra mängu kuupäev',
-            'time.required' => 'Vali mängu alguskellaeg',
-            'stages.required' => 'Määra mängu etapp',
-        ]);
-
-        $statistic = Statistic::create([
-            'team1_id' => $request->team1_id,
-            'team2_id' => $request->team2_id,
-            'date' => $request->date,
-            'time' => $request->time,
-            'venue' => $request->venue,
-            'stages' => $request->stages,
-        ]);
-
-
-        return redirect(route('statistics.index', absolute: false));
+            'statistics.*.schedule_id.required' => 'Vali meeskond 1',
+        ]); 
+    
+        foreach ($request->statistics as $playerStatistics) {
+            // Create a new Statistic instance
+            $statistic = new Statistic();
+    
+            // Assign the data from the request to the Statistic instance
+            $statistic->fill($playerStatistics);
+    
+            // Save the statistic to the database
+            $statistic->save();
+        }
+    
+        return redirect()->route('statistics.index');
     }
 
     /**
