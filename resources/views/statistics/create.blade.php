@@ -15,10 +15,7 @@
                         <table class="w-auto">
                             <thead>
                                 <tr>
-                                    <th><x-input-label for="schedule_id" :value="__('schedule_id')" /></th>
-                                    <th><x-input-label for="team_id" :value="__('team_id')" /></th>
-                                    <th><x-input-label for="player_id" :value="__('player_id')" /></th>
-                                    <th><x-input-label for="participated" :value="__('Protokollis')" /></th>
+
                                     <th><x-input-label for="name" :value="__('Mängija')" /></th>
                                     <th><x-input-label for="game_jersey_nr" :value="__('Särgi nr.')" /></th>
                                     <th><x-input-label for="played" :value="__('Minutid')" /></th>
@@ -33,58 +30,52 @@
                             </thead>
                             <tbody>
                                 @foreach ($team1Players as $player)
+                        
+                                <input type="hidden" name="statistics[{{ $player->id }}][schedule_id]" value="{{ $schedule->id }}">
+                                <input-error :messages="$errors->get('schedule_id')" class="mt-2" />
+                            
+                                <input type="hidden" name="statistics[{{ $player->id }}][team_id]" value="{{ $schedule->team1_id }}">
+                                <input-error :messages="$errors->get('team_id')" class="mt-2" />
+                            
+                                <input type="hidden" name="statistics[{{ $player->id }}][player_id]" value="{{ $player->id }}">
+                                <input-error :messages="$errors->get('player_id')" class="mt-2" />
+                                    
                                 <tr>
-                                   <td>
-                                        <input type="text" name="statistics[{{ $player->id }}][schedule_id]" class="form-input w-12" value="{{ $schedule->id }}">
-                                        <input-error :messages="$errors->get('schedule_id')" class="mt-2" />
-                                    </td>
-                                    <td>
-                                        <input type="text" name="statistics[{{ $player->id }}][team_id]" class="form-input w-12" value="{{ $schedule->team1_id }}">
-                                        <input-error :messages="$errors->get('team_id')" class="mt-2" />
-                                    </td>
-                                    <td>
-                                        <input type="text" name="statistics[{{ $player->id }}][player_id]" class="form-input w-12" value="{{ $player->id }}">
-                                        <input-error :messages="$errors->get('player_id')" class="mt-2" />
-                                    </td>
-                                    <td>
-                                        <input type="checkbox" name="players[{{ $player->id }}][participated]" class="form-checkbox" checked>
-                                        <label for="participated">Protokollis</label>
-                                    </td>
                                     <td>{{ $player->first_name . ' ' . $player->last_name }}</td>
                                     <td>
-                                        <input type="text" name="statistics[{{ $player->id }}][game_jersey_nr]" class="form-input w-12" :value="old('game_jersey_nr')">
+                                        <input type="text" name="statistics[{{ $player->id }}][game_jersey_nr]" class="form-input w-20" :value="old('game_jersey_nr')">
                                         <input-error :messages="$errors->get('game_jersey_nr')" class="mt-2" />
                                     </td>
                                     <td>
-                                        <input type="text" name="statistics[{{ $player->id }}][played]" class="form-input w-12" :value="old('played')">
+                                        <input type="text" name="statistics[{{ $player->id }}][played]" class="form-input w-20" :value="old('played')">
                                         <input-error :messages="$errors->get('played')" class="mt-2" />
                                     </td>
                                     <td>
-                                        <input type="text" name="statistics[{{ $player->id }}][3-p]" class="form-input w-12" :value="old('3-p')">
+                                        <input type="text" name="statistics[{{ $player->id }}][3-p]" class="form-input w-20" :value="old('3-p')">
                                         <input-error :messages="$errors->get('3-p')" class="mt-2" />
                                     </td>
                                     <td>
-                                        <input type="text" name="statistics[{{ $player->id }}][free_t]" class="form-input w-12" :value="old('free_t')">
+                                        <input type="text" name="statistics[{{ $player->id }}][free_t]" class="form-input w-20" :value="old('free_t')">
                                         <input-error :messages="$errors->get('free_t')" class="mt-2" />
                                     </td>
                                     <td>
-                                        <input type="text" name="statistics[{{ $player->id }}][free_m]" class="form-input w-12" :value="old('free_m')">
+                                        <input type="text" name="statistics[{{ $player->id }}][free_m]" class="form-input w-20" :value="old('free_m')">
                                         <input-error :messages="$errors->get('free_m')" class="mt-2" />
                                     </td>
                                     <td>
-                                        <input type="text" name="statistics[{{ $player->id }}][fouls]" class="form-input w-12" :value="old('fouls')">
+                                        <input type="text" name="statistics[{{ $player->id }}][fouls]" class="form-input w-20" :value="old('fouls')">
                                         <input-error :messages="$errors->get('fouls')" class="mt-2" />
                                     </td>
                                     <td>
-                                        <input type="text" name="statistics[{{ $player->id }}][techincals]" class="form-input w-12" :value="old('techincals')">
+                                        <input type="text" name="statistics[{{ $player->id }}][techincals]" class="form-input w-20" :value="old('techincals')">
                                         <input-error :messages="$errors->get('techincals')" class="mt-2" />
                                     </td>
                                     <td>
-                                        <input type="text" name="statistics[{{ $player->id }}][unsportsman]" class="form-input w-12" :value="old('unsportsman')">
+                                        <input type="text" name="statistics[{{ $player->id }}][unsportsman]" class="form-input w-20" :value="old('unsportsman')">
                                         <input-error :messages="$errors->get('unsportsman')" class="mt-2" />
                                     </td>
                                     <td>
-                                        <input type="text" name="statistics[{{ $player->id }}][points]" class="form-input w-12" :value="old('points')">
+                                        <input type="text" name="statistics[{{ $player->id }}][points]" class="form-input w-20" :value="old('points')">
                                         <input-error :messages="$errors->get('points')" class="mt-2" />
                                     </td>
                                 </tr>
@@ -95,9 +86,6 @@
                         <table class="w-auto">
                             <thead>
                                 <tr>
-                                    <th><x-input-label for="schedule_id" :value="__('schedule_id')" /></th>
-                                    <th><x-input-label for="team_id" :value="__('team_id')" /></th>
-                                    <th><x-input-label for="player_id" :value="__('player_id')" /></th>
                                     <th><x-input-label for="name" :value="__('Mängija')" /></th>
                                     <th><x-input-label for="game_jersey_nr" :value="__('Särgi nr.')" /></th>
                                     <th><x-input-label for="played" :value="__('Minutid')" /></th>
@@ -112,54 +100,52 @@
                             </thead>
                             <tbody>
                                 @foreach ($team2Players as $player)
+                        
+                                <input type="hidden" name="statistics[{{ $player->id }}][schedule_id]" value="{{ $schedule->id }}">
+                                <input-error :messages="$errors->get('schedule_id')" class="mt-2" />
+                            
+                                <input type="hidden" name="statistics[{{ $player->id }}][team_id]" value="{{ $schedule->team1_id }}">
+                                <input-error :messages="$errors->get('team_id')" class="mt-2" />
+                            
+                                <input type="hidden" name="statistics[{{ $player->id }}][player_id]" value="{{ $player->id }}">
+                                <input-error :messages="$errors->get('player_id')" class="mt-2" />
+                                    
                                 <tr>
-                                   <td>
-                                        <input type="text" name="statistics[{{ $player->id }}][schedule_id]" class="form-input w-12" value="{{ $schedule->id }}">
-                                        <input-error :messages="$errors->get('schedule_id')" class="mt-2" />
-                                    </td>
-                                    <td>
-                                        <input type="text" name="statistics[{{ $player->id }}][team_id]" class="form-input w-12" value="{{ $schedule->team2_id }}">
-                                        <input-error :messages="$errors->get('team_id')" class="mt-2" />
-                                    </td>
-                                    <td>
-                                        <input type="text" name="statistics[{{ $player->id }}][player_id]" class="form-input w-12" value="{{ $player->id }}">
-                                        <input-error :messages="$errors->get('player_id')" class="mt-2" />
-                                    </td>
                                     <td>{{ $player->first_name . ' ' . $player->last_name }}</td>
                                     <td>
-                                        <input type="text" name="statistics[{{ $player->id }}][game_jersey_nr]" class="form-input w-12" :value="old('game_jersey_nr')">
+                                        <input type="text" name="statistics[{{ $player->id }}][game_jersey_nr]" class="form-input w-20" :value="old('game_jersey_nr')">
                                         <input-error :messages="$errors->get('game_jersey_nr')" class="mt-2" />
                                     </td>
                                     <td>
-                                        <input type="text" name="statistics[{{ $player->id }}][played]" class="form-input w-12" :value="old('played')">
+                                        <input type="text" name="statistics[{{ $player->id }}][played]" class="form-input w-20" :value="old('played')">
                                         <input-error :messages="$errors->get('played')" class="mt-2" />
                                     </td>
                                     <td>
-                                        <input type="text" name="statistics[{{ $player->id }}][3-p]" class="form-input w-12" :value="old('3-p')">
+                                        <input type="text" name="statistics[{{ $player->id }}][3-p]" class="form-input w-20" :value="old('3-p')">
                                         <input-error :messages="$errors->get('3-p')" class="mt-2" />
                                     </td>
                                     <td>
-                                        <input type="text" name="statistics[{{ $player->id }}][free_t]" class="form-input w-12" :value="old('free_t')">
+                                        <input type="text" name="statistics[{{ $player->id }}][free_t]" class="form-input w-20" :value="old('free_t')">
                                         <input-error :messages="$errors->get('free_t')" class="mt-2" />
                                     </td>
                                     <td>
-                                        <input type="text" name="statistics[{{ $player->id }}][free_m]" class="form-input w-12" :value="old('free_m')">
+                                        <input type="text" name="statistics[{{ $player->id }}][free_m]" class="form-input w-20" :value="old('free_m')">
                                         <input-error :messages="$errors->get('free_m')" class="mt-2" />
                                     </td>
                                     <td>
-                                        <input type="text" name="statistics[{{ $player->id }}][fouls]" class="form-input w-12" :value="old('fouls')">
+                                        <input type="text" name="statistics[{{ $player->id }}][fouls]" class="form-input w-20" :value="old('fouls')">
                                         <input-error :messages="$errors->get('fouls')" class="mt-2" />
                                     </td>
                                     <td>
-                                        <input type="text" name="statistics[{{ $player->id }}][techincals]" class="form-input w-12" :value="old('techincals')">
+                                        <input type="text" name="statistics[{{ $player->id }}][techincals]" class="form-input w-20" :value="old('techincals')">
                                         <input-error :messages="$errors->get('techincals')" class="mt-2" />
                                     </td>
                                     <td>
-                                        <input type="text" name="statistics[{{ $player->id }}][unsportsman]" class="form-input w-12" :value="old('unsportsman')">
+                                        <input type="text" name="statistics[{{ $player->id }}][unsportsman]" class="form-input w-20" :value="old('unsportsman')">
                                         <input-error :messages="$errors->get('unsportsman')" class="mt-2" />
                                     </td>
                                     <td>
-                                        <input type="text" name="statistics[{{ $player->id }}][points]" class="form-input w-12" :value="old('points')">
+                                        <input type="text" name="statistics[{{ $player->id }}][points]" class="form-input w-20" :value="old('points')">
                                         <input-error :messages="$errors->get('points')" class="mt-2" />
                                     </td>
                                 </tr>
