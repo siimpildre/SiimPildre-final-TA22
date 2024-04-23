@@ -7,13 +7,15 @@ use App\Http\Controllers\TeamController;
 use App\Http\Controllers\ChirpController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\StatisticController;
+use App\Http\Controllers\WelcomeController;
 use App\Models\Team;
 use App\Models\Player;
 use App\Models\Schedule;
 use App\Models\Statistic;
 
 Route::get('/', function () {
-    return view('welcome');
+    $schedules = Schedule::all();
+    return view('welcome', ['schedules' => $schedules]);
 });
 
 Route::get('/dashboard', function () {
@@ -26,8 +28,10 @@ Route::middleware('auth')->group(function () {
     Route::resource("schedules", ScheduleController::class);
     Route::resource("statistics", StatisticController::class);
 
+    Route::get('/welcome', [WelcomeController::class, 'index'])->name('welcome.index');
+
+
     Route::get('/statistics/create', [StatisticController::class, 'create'])->name('statistics.create');
-    Route::get('/', 'WelcomeController@index')->name('welcome');
 
     Route::post('/teams.store', [TeamController::class, 'store']);
     Route::post('/players.store', [PlayerController::class, 'store']);

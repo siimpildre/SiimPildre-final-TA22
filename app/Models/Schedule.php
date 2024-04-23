@@ -26,4 +26,9 @@ class Schedule extends Model
         return $this->belongsTo(Team::class, 'team2_id');
     }
 
+    public function statistics()
+    {
+        return $this->hasOne(Statistic::class);
+    }
+
 }

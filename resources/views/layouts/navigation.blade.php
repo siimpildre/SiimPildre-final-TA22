@@ -28,9 +28,10 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                <a href="{{ route('dashboard') }}" class="spin-on-load inline-block" style="animation: spin 6s ease-in-out 1;">
-                    <x-application-logo class="block h-9 w-auto fill-current text-gray-700" />
+                <a href="./" class="spin-on-load inline-block" style="animation: spin 3s ease-in-out;">
+                    <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
                 </a>
+
 
 
                 </div>
@@ -158,9 +159,11 @@
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     const link = document.querySelector('.spin-on-load');
+
     link.addEventListener('mouseenter', function() {
-      this.style.animation = 'spin-hover 1.5s ease-in-out 1';
+      this.style.animation = 'none'; 
+      void this.offsetWidth;
+      this.style.animation = 'spin-hover 1.5s linear 1'; 
     });
   });
 </script>
-
