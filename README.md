@@ -50,5 +50,3 @@ It is a web application built using the Laravel PHP framework with Blade templat
 
     The application allows users to make teams, add players and make a schedule with statistics of each game.
 
-
-For any inquiries or issues, please contact SiimPildre through github .
