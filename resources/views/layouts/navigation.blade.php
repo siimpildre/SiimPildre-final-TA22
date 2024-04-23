@@ -1,13 +1,38 @@
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
+<style>
+  @layer utilities {
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg); /* Two full spins */
+      }
+    }
+
+    @keyframes spin-hover {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg); /* One full spin */
+      }
+    }
+  }
+</style>
+
+
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
-                    </a>
+                <a href="{{ route('dashboard') }}" class="spin-on-load inline-block" style="animation: spin 6s ease-in-out 1;">
+                    <x-application-logo class="block h-9 w-auto fill-current text-gray-700" />
+                </a>
+
+
                 </div>
 
                 <!-- Navigation Links -->
@@ -129,3 +154,13 @@
         </div>
     </div>
 </nav>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const link = document.querySelector('.spin-on-load');
+    link.addEventListener('mouseenter', function() {
+      this.style.animation = 'spin-hover 1.5s ease-in-out 1';
+    });
+  });
+</script>
+
