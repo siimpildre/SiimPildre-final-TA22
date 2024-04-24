@@ -12,16 +12,29 @@
 
         <!-- Styles -->
         <style>
-            .background-container {
-                /* Set background size to cover entire container */
+            .banner-container {
                 background-size: cover;
-                
-                /* Set background position to center */
                 background-position: center;
-                
-                /* Ensure the container takes up the entire viewport */
                 width: 100vw;
-                height: 100vh;
+                height: 340px;
+            }
+            .footer-img-container {
+                width: 100vw; 
+                height: auto; /* Default height for small screens */
+                background-size: cover; 
+                background-position: center bottom; 
+            }
+
+            @media (min-width: 768px) {
+                .banner-container {
+                    height: 350px; /* Adjust height for medium screens */
+                }
+            }
+
+            @media (min-width: 1024px) {
+                .banner-container {
+                    height: 500px; /* Limit maximum height for large screens */
+                }
             }
 
             @media (max-width: 767px) {
@@ -29,6 +42,9 @@
                     font-size: 40px;
                     text-transform: uppercase;
                     text-align: center;
+                }
+                .sm\:custom-heading {
+                    
                 }
             }
             @media (min-width: 768px) {
@@ -80,7 +96,7 @@
 
     </head>
     <body class="bg-black">
-        <header class="background-container bg-banner-ball">
+        <header class="banner-container bg-banner-ball">
             <div class="min-h-screen flex flex-col items-center">
                 <div class="w-full max-w-2xl px-6 lg:max-w-7xl">
                     <div class="grid grid-cols-2 justify-between pt-4 pb-10 lg:pb-10 lg:grid-cols-2">
@@ -96,7 +112,7 @@
                         <x-guest-hamburger/>
 
                     </div>
-                    <div class="flex pb-2 pt-44 justify-center">
+                    <div class="flex pb-2 pt-44 lg:pt-64 justify-center">
                         <h1 class="lg:custom-heading sm:custom-heading md:custom-heading lg:custom-heading lg:py-2 text-white">
                             Saaremaa Korvpall
                         </h1>
@@ -104,11 +120,74 @@
                 </div>
             </div>
         </header>
-        <main class="bg-ball-basket">
+        <main class="my-10 relative bg-ball-basket flex-column bg-black text-white justify-items-center">
+            <div class="bg-black w-full flex justify-center py-4">
 
+                @php
+                    // Filter schedules to find the last game with statistics
+                    $lastGameWithStats = $schedules->filter(function($schedule) {
+                        return $schedule->statistics()->exists();
+                    })->last();
+                @endphp
+
+                @if($lastGameWithStats)
+                    <div class=" w-auto bg-black">
+                        <a href="https://laracasts.com" class="text-relative flex justify-center rounded-lg p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:ring-black/20 focus:outline-none lg:pb-10 bg-zinc-900 ring-zinc-800 hover:text-orange-500 hover:ring-zinc-700 focus-visible:ring-orange-500 spin-on-load">
+                            <div class="pt-3 sm:pt-5 text-center">
+                                <h2 class="text-xl font-semibold">{{ $lastGameWithStats->team1->team_name }} vs {{ $lastGameWithStats->team2->team_name }}</h2>
+                                <p class="mt2 text-lg">
+                                Total Score: 
+                                </p>
+                                <p class="mt-4 text-sm/relaxed">
+                                    {{ date('d.m.Y', strtotime($lastGameWithStats->date)) }}
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                @else
+                    <p>Statistikat veel ei ole</p>
+                @endif
+            </div>
+            <div class="bg-black text-center pb-10">
+                <x-primary-button href="{{ url('/') }}" class="rounded-md px-3 py-2 text-white ring-1 ring-transparent transition hover:text-orange-500 focus:outline-none focus-visible:ring-orange-500/90 ">Vaata rohkem</x-primary-button>
+            </div>
+
+
+
+            <div class="bg-black">
+                <div class="relative bg-ball-basket footer-img-container flex justify-center">
+                    <div class="w-full max-w-2xl p-6 lg:max-w-7xl flex-column justify-center">
+                        <h2 class="text-center mb-4 lg:text-4xl flex justify-center" style="text-transform: uppercase;">
+                            Järgmised mängud:
+                        </h2>
+                        <div class="grid gap-6 sm:grid-cols-2 md:grid-cols-3 md:gap-3 lg:grid-cols-4 lg:gap-8">
+                            @foreach ($schedules as $index => $schedule)
+                                <a href="" class="text-relative flex justify-center rounded-lg p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:ring-black/20 focus:outline-none lg:pb-10 bg-zinc-900 ring-zinc-800 hover:text-orange-500 hover:ring-zinc-700 focus-visible:ring-orange-500 spin-on-load">
+                                    <div class="pt-3 sm:pt-5 text-center">
+                                        <h2 class="text-xl font-semibold">{{ $schedule->team1->team_name }} vs {{ $schedule->team2->team_name }}</h2>
+                                        <p class="mt2 text-lg">
+                                            {{ date('H:i', strtotime($schedule->time))}}
+                                        </p>
+                                        <div class="mt-4 inline-block">
+                                            <x-application-logo class="block h-9 w-auto fill-current text-gray-300" />
+                                        </div>
+                                        <p class="mt-4 text-sm/relaxed">
+                                            {{ date('d.m.Y', strtotime($schedule->date)) }}
+                                            <br>
+                                            {{ $schedule->venue }}
+                                        </p>
+                                    </div>
+                                </a>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
         </main>
-        <footer>
-
+        <footer class="relative lg:py-10 text-center text-sm text-black dark:text-white/70">
+            <a href="https://www.facebook.com/saarespordiselts" class="rounded-md px-3 py-2 text-white ring-1 ring-transparent transition hover:text-orange-500 focus:outline-none focus-visible:ring-orange-500/90">
+                Saare Spordiselts MTÜ
+            </a>
         </footer>
         <script>
             document.addEventListener('DOMContentLoaded', function () {
