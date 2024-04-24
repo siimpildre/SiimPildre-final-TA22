@@ -14,6 +14,10 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+            backgroundImage: {
+                'banner-ball': "url('/public/pictures/banner.png')",
+                'ball-basket': "url('/public/pictures/balls_opacity.png')",
+              },
         },
     },
 

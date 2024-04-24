@@ -6,7 +6,7 @@
         transform: rotate(0deg);
       }
       100% {
-        transform: rotate(360deg); /* Two full spins */
+        transform: rotate(360deg);
       }
     }
 
@@ -15,7 +15,7 @@
         transform: rotate(0deg);
       }
       100% {
-        transform: rotate(360deg); /* One full spin */
+        transform: rotate(360deg); 
       }
     }
   }
@@ -163,7 +163,7 @@
     link.addEventListener('mouseenter', function() {
       this.style.animation = 'none'; 
       void this.offsetWidth;
-      this.style.animation = 'spin-hover 1.5s linear 1'; 
+      this.style.animation = 'spin-hover 1.5s ease-in-out 1'; 
     });
   });
 </script>
