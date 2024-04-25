@@ -22,6 +22,10 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/tulemused', function () {
+    return view('tulemused');
+});
+
 Route::middleware('auth')->group(function () {
     Route::resource("teams", TeamController::class);
     Route::resource("players", PlayerController::class);

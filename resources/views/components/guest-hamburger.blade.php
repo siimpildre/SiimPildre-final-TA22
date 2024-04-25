@@ -12,8 +12,9 @@
     <div id="mobile-menu" class="hidden absolute top-14 inset-x-0 transition transform origin-top-right">
         <div class="shadow-lg opacity-85 bg-black divide-y divide-gray-100">
             <div class="px-5 py-6 text-right">
-                <a href="{{ url('/') }}" class="block py-2 text-white hover:text-orange-500">Meeskonnad</a>
-                <a href="{{ url('/') }}" class="block py-2 text-white hover:text-orange-500">Tulemused</a>
+                <a href="{{ url('/meeskonnad') }}" class="block py-2 text-white hover:text-orange-500">Meeskonnad</a>
+                <a href="{{ url('/mangijad') }}" class="block py-2 text-white hover:text-orange-500">Mängijad</a>
+                <a href="{{ url('/tulemused') }}" class="block py-2 text-white hover:text-orange-500">Tulemused</a>
                 @auth
                     <a href="{{ url('/dashboard') }}" class="block py-2 text-white hover:text-orange-500">Töölaud</a>
                 @else
@@ -31,14 +32,15 @@
 <div class="hidden sm:flex md:flex flex-1 justify-end">
     @if (Route::has('login'))
         <nav class="flex flex-1 justify-end">
-            <a href="{{ url('/') }}" class="rounded-md px-3 py-2 text-white ring-1 ring-transparent transition hover:text-orange-500 focus:outline-none focus-visible:ring-orange-500/90 ">Meeskonnad</a>
-            <a href="{{ url('/') }}" class="rounded-md px-3 py-2 text-white ring-1 ring-transparent transition hover:text-orange-500 focus:outline-none focus-visible:ring-orange-500/90 ">Tulemused</a>
+            <x-g-nav-link href="{{ url('/meeskonnad') }}" >Meeskonnad</x-g-nav-link>
+            <x-g-nav-link href="{{ url('/mangijad') }}">Mängijad</x-g-nav-link>
+            <x-g-nav-link href="{{ url('/tulemused') }}" >Tulemused</x-g-nav-link>
             @auth
-                <a href="{{ url('/dashboard') }}" class="rounded-md px-3 py-2 text-white ring-1 ring-transparent transition hover:text-orange-500 focus:outline-none focus-visible:ring-orange-500/90 ">Töölaud</a>
+                <x-g-nav-link href="{{ url('/dashboard') }}" >Töölaud</x-g-nav-link>
             @else
-                <a href="{{ route('login') }}" class="rounded-md px-3 py-2 text-white ring-1 ring-transparent transition hover:text-orange-500 focus:outline-none focus-visible:ring-orange-500/90 ">Logi sisse</a>
+                <x-g-nav-link href="{{ route('login') }}">Logi sisse</x-g-nav-link>
                 @if (Route::has('register'))
-                    <a href="{{ route('register') }}" class="rounded-md px-3 py-2 text-white ring-1 ring-transparent transition hover:text-orange-500 focus:outline-none focus-visible:ring-orange-500/90 ">Registreeri</a>
+                    <x-g-nav-link href="{{ route('register') }}">Registreeri</x-g-nav-link>
                 @endif
             @endauth
         </nav>

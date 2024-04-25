@@ -106,7 +106,7 @@
                                     <input type="hidden" name="statistics[{{ $player->id }}][schedule_id]" value="{{ $schedule->id }}">
                                     <input-error :messages="$errors->get('schedule_id')" class="mt-2" />
                                 
-                                    <input type="hidden" name="statistics[{{ $player->id }}][team_id]" value="{{ $schedule->team1_id }}">
+                                    <input type="hidden" name="statistics[{{ $player->id }}][team_id]" value="{{ $schedule->team2_id }}">
                                     <input-error :messages="$errors->get('team_id')" class="mt-2" />
                                 
                                     <input type="hidden" name="statistics[{{ $player->id }}][player_id]" value="{{ $player->id }}">

@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Models\Schedule;
 use App\Models\Team;
-use Illuminate\Http\Request;
+use App\Models\Chirp;
 
 class WelcomeController extends Controller
 {
@@ -12,11 +13,12 @@ class WelcomeController extends Controller
     {
         $schedules = Schedule::all();
         $teams = Team::all();
+        $chirps = Chirp::latest()->get();
         
         return view('welcome', [
             'teams' => $teams,
             'schedules' => $schedules,
-            "welcome" => Welcome::paginate(20),
+            'chirps' => $chirps,
         ]);
     }
 }

@@ -15,48 +15,104 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
         <style>
-        @layer utilities {
-            @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg); 
-            }
+            .banner-container {
+                background-size: cover;
+                background-position: center;
+                width: 100vw;
+                height: 200px;
             }
 
-            @keyframes spin-hover {
-            0% {
-                transform: rotate(0deg);
+            @media (max-width: 767px) {
+                .sm\:custom-heading {
+                    font-size: 40px;
+                    text-transform: uppercase;
+                    text-align: center;
+                }
+                .sm\:custom-heading {
+                    
+                }
             }
-            100% {
-                transform: rotate(360deg);
+            @media (min-width: 768px) {
+                .md\:custom-heading {
+                    font-size: 50px;
+                    text-transform: uppercase;
+                    text-align: center;
+                }
             }
+
+            @media (min-width: 1024px) {
+                .lg\:custom-heading {
+                    font-size: 80px;
+                    text-transform: uppercase;
+                    text-align: center;
+                }
             }
-        }
-</style>
+            @media (min-width: 1260px) {
+                .lg\:custom-heading {
+                    font-size: 110px;
+                    text-transform: uppercase;
+                    text-align: center;
+                }
+            }
+
+            @layer utilities {
+                @keyframes spin {
+                0% {
+                    transform: rotate(0deg);
+                }
+                100% {
+                    transform: rotate(360deg); 
+                }
+                }
+
+                @keyframes spin-hover {
+                0% {
+                    transform: rotate(0deg);
+                }
+                100% {
+                    transform: rotate(360deg); 
+                }
+                }
+            }
+            
+        </style>
     </head>
-    <body class="font-sans text-gray-400 antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-black">
-            <div>
-            <a href="{{ route('dashboard') }}" class="spin-on-load inline-block" style="animation: spin 6s ease-in-out 1;">
-                    <x-application-logo class="block h-40 w-auto fill-current text-gray-300" />
-                </a>
-            </div>
+    <body x-data="{ open: false }" class="bg-black">
+        <header class="banner-container bg-banner-ball">
+            <div class="min-h-screen flex flex-col items-center">
+                <div class="w-full max-w-2xl px-6 lg:max-w-7xl">
+                    <div class="grid grid-cols-2 justify-between pt-4 pb-10 lg:pb-10 lg:grid-cols-2">
+                        <a href="./" class="flex items-center">
+                            <h3 class="rounded-md px-3 py-2 text-white/90">
+                                Saare Spordiselts 
+                            </h3>
+                            <div class="spin-on-load inline-block" style="animation: spin 3s ease-in-out;">
+                                <x-application-logo class="block h-9 w-auto fill-current text-gray-200" />
+                            </div>
+                        </a>
 
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-black shadow-md overflow-hidden sm:rounded-lg">
-                {{ $slot }}
+                        <x-guest-hamburger/>
+
+                    </div>
+
+
+                    
+                </div>
             </div>
-        </div>
+        </header>
+    <body class="font-sans text-gray-400 antialiased">
+        {{ $slot }}
     </body>
 </html>
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     const link = document.querySelector('.spin-on-load');
+
     link.addEventListener('mouseenter', function() {
-      this.style.animation = 'spin-hover 1.5s ease-in-out 1';
+      this.style.animation = 'none'; 
+      void this.offsetWidth;
+      this.style.animation = 'spin-hover 1.5s ease-in-out 1'; 
     });
   });
 </script>
-

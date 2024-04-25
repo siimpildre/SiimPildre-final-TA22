@@ -36,7 +36,7 @@
                             </div>
 
                             <div class="mt-4">
-                                <x-primary-button>{{ __('Vaata statistikat') }}</x-primary-button>
+                                <x-primary-button>{{ __('Lisa statistikat') }}</x-primary-button>
                             </div>
                         </form>
 
