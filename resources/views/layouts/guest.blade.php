@@ -100,7 +100,7 @@
                 </div>
             </div>
         </header>
-    <body class="font-sans text-gray-400 antialiased">
+    <body class="font-sans text-gray-400 antialiased p-8">
         {{ $slot }}
     </body>
 </html>
