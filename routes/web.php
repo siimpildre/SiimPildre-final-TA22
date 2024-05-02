@@ -8,10 +8,12 @@ use App\Http\Controllers\ChirpController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\StatisticController;
 use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\TulemusedController;
 use App\Models\Team;
 use App\Models\Player;
 use App\Models\Schedule;
 use App\Models\Statistic;
+
 
 Route::get('/', function () {
     $schedules = Schedule::all();
@@ -23,7 +25,8 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/tulemused', function () {
-    return view('tulemused');
+    $schedules = Schedule::all();
+    return view('tulemused', ['schedules' => $schedules]);
 });
 
 Route::middleware('auth')->group(function () {
@@ -33,7 +36,7 @@ Route::middleware('auth')->group(function () {
     Route::resource("statistics", StatisticController::class);
 
     Route::get('/welcome', [WelcomeController::class, 'index'])->name('welcome.index');
-
+    Route::get('/tulemused', [TulemusedController::class, 'index'])->name('tulemused.index');
 
     Route::get('/statistics/create', [StatisticController::class, 'create'])->name('statistics.create');
 

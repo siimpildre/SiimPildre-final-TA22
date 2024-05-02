@@ -47,7 +47,7 @@
             
         </style>
     </head>
-    <body x-data="{ open: false }" class="bg-black">
+    <body class="bg-black">
         <header class="banner-container bg-banner-ball">
             <div class="min-h-screen flex flex-col items-center">
                 <div class="w-full max-w-2xl px-6 lg:max-w-7xl">
@@ -73,45 +73,53 @@
             </div>
         </header>
     <body class="font-sans text-gray-400 antialiased">
-    <main class="my-10 relative bg-ball-basket flex-column bg-black text-white justify-items-center">
-            <div class="bg-black w-full flex justify-center py-4">
-                @php
-                    // Filter schedules to find the last game with statistics
-                    $lastGameWithStats = $schedules->filter(function($schedule) {
-                        return $schedule->statistics()->exists();
-                    })->last();
-                @endphp
-
-                @if($lastGameWithStats)
+    <main class="my-10 relative flex-column bg-black text-grey justify-items-center">
+        <div class="bg-black w-full max-w-2xl px-6 lg:max-w-7xl flex justify-center py-4">
+            <table class="w-full rounded-lg p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:ring-black/20 focus:outline-none lg:pb-10 bg-zinc-900/80 hover:bg-zinc-900/95 ring-zinc-800 hover:text-orange-500 hover:ring-zinc-700 focus-visible:ring-orange-500 spin-on-load">
+                <thead class="text-white text-left">
+                    <tr>
+                        <th>Meeskond 1</th>
+                        <th>Punkid</th>
+                        <th></th>
+                        <th>Punkid</th>
+                        <th>Meeskond 2</th>
+                        <th>Kuupäev</th>
+                        <th class="hidden lg:table-cell">Kellaaeg</th>
+                        <th class="hidden lg:table-cell">Asukoht</th>
+                        <th class="hidden lg:table-cell">Tüüp</th>
+                        <th ></th>
+                        <th class="hidden lg:table-cell"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($schedules as $schedule)
                     @php
-                        // Calculate total points for team 1
-                        $team1Points = $lastGameWithStats->statistics()->where('team_id', $lastGameWithStats->team1_id)->sum('points');
-                        
-                        // Calculate total points for team 2
-                        $team2Points = $lastGameWithStats->statistics()->where('team_id', $lastGameWithStats->team2_id)->sum('points');
+                        $team1Points = $schedule->statistics()->where('team_id', $schedule->team1_id)->sum('points');
+                        $team2Points = $schedule->statistics()->where('team_id', $schedule->team2_id)->sum('points');
                     @endphp
-
-                    <div class=" w-auto bg-black">
-                        <a href="/" class="text-relative flex justify-center rounded-lg p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:ring-black/20 focus:outline-none lg:pb-10 bg-zinc-900/80 hover:bg-zinc-900/95 ring-zinc-800 hover:text-orange-500 hover:ring-zinc-700 focus-visible:ring-orange-500 spin-on-load">
-                            <div class="pt-3 sm:pt-5 text-center">
-                                <p class="pb-4 text-sm/relaxed">Viimane tulemus:</p>
-                                <h2 class="text-4xl font-semibold">{{ $lastGameWithStats->team1->team_name }} vs {{ $lastGameWithStats->team2->team_name }}</h2>
-                                <p class="mt-2 text-8xl">
-                                    {{ $team1Points }} : {{ $team2Points }} 
-                                </p>
-                                <p class="mt-4 text-sm/relaxed">
-                                    {{ date('d.m.Y', strtotime($lastGameWithStats->date)) }}
-                                    <br>
-                                    {{ $lastGameWithStats->stages }}
-                                </p>
-                            </div>
-                        </a>
-                    </div>
-                @else
-                    <p>Statistikat veel ei ole</p>
-                @endif
-            </div>
-
+                    <tr class="border-b justify-between text-white items-center text-left transition duration-300 ease-in-out hover:bg-gray-800">
+                        <td>{{ $schedule->team1->team_name ?? 'Meeskonda ei leitud' }}</td>
+                        <td>{{ $team1Points }}</td>
+                        <td>:</td>
+                        <td>{{ $team2Points }}</td>
+                        <td>{{ $schedule->team2->team_name ?? 'Meeskonda ei leitud' }}</td>
+                        <td>{{ date('d.m.Y', strtotime($schedule->date)) }}</td>
+                        <td class="hidden lg:table-cell">{{ date('H:i', strtotime($schedule->time)) }}</td>
+                        <td class="hidden lg:table-cell">{{ $schedule->venue }}</td>
+                        <td class="hidden lg:table-cell">{{ $schedule->stages }}</td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+        <footer class="relative lg:py-10 text-center text-sm text-black dark:text-white/70">
+            <a href="https://www.facebook.com/saarespordiselts" class="rounded-md px-3 py-2 text-white ring-1 ring-transparent transition hover:text-orange-500 focus:outline-none focus-visible:ring-orange-500/90">
+                Saare Spordiselts MTÜ
+            </a>
+            <p class="text-white text-sm">
+                saarespordiselts@gmail.com
+            </p>   
+        </footer>
 
 
     </body>

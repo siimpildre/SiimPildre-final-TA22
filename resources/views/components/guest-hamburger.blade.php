@@ -1,4 +1,4 @@
-<div class="sm:hidden md:hidden flex justify-end">
+<div class="sm:hidden flex justify-end">
     <!-- Hamburger icon for mobile -->
     <button @click="open = ! open" id="mobile-menu-toggle" class="block text-white focus:outline-none">
     <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
