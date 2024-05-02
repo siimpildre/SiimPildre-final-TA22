@@ -65,52 +65,20 @@
 
                     </div>
                     <div class="flex pt-4 lg:pt-4 justify-start">
-                        <h1 class="custom-heading sm:text-xl md:text-2xl lg:text-3xl lg:py-2 text-white">
-                            Tulemused
-                        </h1>
+
                     </div>
                 </div>
             </div>
         </header>
     <body class="font-sans text-gray-400 antialiased">
-    <main class="p-8 my-10 relative flex-column bg-black text-grey justify-center">
-        <div class="bg-black relative w-full">
-            <table class="w-full rounded-lg p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:ring-black/20 focus:outline-none lg:pb-10 bg-zinc-900/80 hover:bg-zinc-900/95 ring-zinc-800 hover:text-orange-500 hover:ring-zinc-700 focus-visible:ring-orange-500 spin-on-load">
-                <thead class="text-white text-center">
-                    <tr>
-                        <th>Meeskond 1</th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th>Meeskond 2</th>
-                        <th>Kuupäev</th>
-                        <th class="hidden lg:table-cell">Kellaaeg</th>
-                        <th class="hidden lg:table-cell">Asukoht</th>
-                        <th class="hidden lg:table-cell">Tüüp</th>
-                        <th ></th>
-                        <th class="hidden lg:table-cell"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($schedules as $schedule)
-                    @php
-                        $team1Points = $schedule->statistics()->where('team_id', $schedule->team1_id)->sum('points');
-                        $team2Points = $schedule->statistics()->where('team_id', $schedule->team2_id)->sum('points');
-                    @endphp
-                    <tr class="border-b justify-between text-white items-center text-left transition duration-300 ease-in-out hover:bg-gray-800">
-                        <td>{{ $schedule->team1->team_name ?? 'Meeskonda ei leitud' }}</td>
-                        <td>{{ $team1Points }}</td>
-                        <td>:</td>
-                        <td>{{ $team2Points }}</td>
-                        <td>{{ $schedule->team2->team_name ?? 'Meeskonda ei leitud' }}</td>
-                        <td>{{ date('d.m.Y', strtotime($schedule->date)) }}</td>
-                        <td class="hidden lg:table-cell">{{ date('H:i', strtotime($schedule->time)) }}</td>
-                        <td class="hidden lg:table-cell">{{ $schedule->venue }}</td>
-                        <td class="hidden lg:table-cell">{{ $schedule->stages }}</td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
+    <main class="my-10 relative flex-column bg-black text-grey justify-items-center">
+        <div class="relative lg:py-10 text-center text-sm text-black dark:text-white/70">
+            <h1 class="custom-heading text-center sm:text-xl md:text-2xl lg:text-3xl lg:py-2 text-white">
+                Leht on ehitamisel
+            </h1>
+            <div class="spin-on-load inline-block" style="animation: spin 3s ease-in-out;">
+                <x-application-logo class="block h-9 w-auto fill-current text-gray-200" />
+            </div>
         </div>
         <footer class="relative lg:py-10 text-center text-sm text-black dark:text-white/70">
             <a href="https://www.facebook.com/saarespordiselts" class="rounded-md px-3 py-2 text-white ring-1 ring-transparent transition hover:text-orange-500 focus:outline-none focus-visible:ring-orange-500/90">

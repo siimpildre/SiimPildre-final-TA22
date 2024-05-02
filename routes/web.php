@@ -13,6 +13,8 @@ use App\Models\Team;
 use App\Models\Player;
 use App\Models\Schedule;
 use App\Models\Statistic;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
 
 
 Route::get('/', function () {
@@ -29,6 +31,13 @@ Route::get('/tulemused', function () {
     return view('tulemused', ['schedules' => $schedules]);
 });
 
+Route::get('/tulemused', [TulemusedController::class, 'index'])->name('tulemused.index');
+
+Route::fallback(function () {
+    return View::make('errors.404');
+});
+
+
 Route::middleware('auth')->group(function () {
     Route::resource("teams", TeamController::class);
     Route::resource("players", PlayerController::class);
@@ -36,7 +45,7 @@ Route::middleware('auth')->group(function () {
     Route::resource("statistics", StatisticController::class);
 
     Route::get('/welcome', [WelcomeController::class, 'index'])->name('welcome.index');
-    Route::get('/tulemused', [TulemusedController::class, 'index'])->name('tulemused.index');
+
 
     Route::get('/statistics/create', [StatisticController::class, 'create'])->name('statistics.create');
 

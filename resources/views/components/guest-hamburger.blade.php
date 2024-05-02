@@ -17,6 +17,7 @@
                 <a href="{{ url('/tulemused') }}" class="block py-2 text-white hover:text-orange-500">Tulemused</a>
                 @auth
                     <a href="{{ url('/dashboard') }}" class="block py-2 text-white hover:text-orange-500">Töölaud</a>
+                    <a href="{{ route('logout') }}" class="block py-2 text-white hover:text-orange-500">Logi välja</a>
                 @else
                     <a href="{{ route('login') }}" class="block py-2 text-white hover:text-orange-500">Logi sisse</a>
                     @if (Route::has('register'))
@@ -29,14 +30,23 @@
 </div>
 
 <!-- Desktop menu -->
-<div class="hidden sm:flex md:flex flex-1 justify-end">
+<div class="hidden sm:flex md:flex flex-1 justify-end items-center">
     @if (Route::has('login'))
-        <nav class="flex flex-1 justify-end">
-            <x-g-nav-link href="{{ url('/meeskonnad') }}" >Meeskonnad</x-g-nav-link>
+        <nav class="flex flex-1 justify-end items-center">
+            <x-g-nav-link href="{{ url('/meeskonnad') }}">Meeskonnad</x-g-nav-link>
             <x-g-nav-link href="{{ url('/mangijad') }}">Mängijad</x-g-nav-link>
-            <x-g-nav-link href="{{ url('/tulemused') }}" >Tulemused</x-g-nav-link>
+            <x-g-nav-link href="{{ url('/tulemused') }}">Tulemused</x-g-nav-link>
             @auth
-                <x-g-nav-link href="{{ url('/dashboard') }}" >Töölaud</x-g-nav-link>
+                <x-g-nav-link href="{{ url('/dashboard') }}">Töölaud</x-g-nav-link>
+                <!-- Remove unnecessary container around form -->
+                <form method="POST" action="{{ route('logout') }}" class="inline-block">
+                    @csrf
+                    <x-g-nav-link :href="route('logout')"
+                            onclick="event.preventDefault();
+                                        this.closest('form').submit();">
+                        {{ __('Logi välja') }}
+                    </x-g-nav-link>
+                </form>
             @else
                 <x-g-nav-link href="{{ route('login') }}">Logi sisse</x-g-nav-link>
                 @if (Route::has('register'))
