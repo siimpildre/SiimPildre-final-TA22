@@ -11,10 +11,9 @@ set('http_user', 'virt118418');
 set('keep_release', 2);
 
 host('ta22pildre.itmajakas.ee')
-    ->setHostname('saarespordiselts.ta22pildre.itmajakas.ee')
+    ->setHostname('ta22pildre.itmajakas.ee')
     ->set('http_user','virt118418')
-    ->set('deploy_path','~/domeenid/www.ta22pildre.itmajakas.ee/saarespordiselts
-')
+    ->set('deploy_path','~/domeenid/www.ta22pildre.itmajakas.ee/saarespordiselts')
     ->set('branch','main');
 
 set('repository', 'git@github.com:siimpildre/SiimPildre-final-TA22.git');
