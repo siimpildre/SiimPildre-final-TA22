@@ -94,9 +94,6 @@
                         <x-guest-hamburger/>
 
                     </div>
-
-
-                    
                 </div>
             </div>
         </header>
