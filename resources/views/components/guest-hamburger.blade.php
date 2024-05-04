@@ -1,15 +1,14 @@
-<div class="sm:hidden flex justify-end">
+<div class="flex justify-end xs:hidden">
     <!-- Hamburger icon for mobile -->
-    <button @click="open = ! open" id="mobile-menu-toggle" class="block text-white focus:outline-none">
-    <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-        <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-        <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-    </svg>
+        <button @click="open = !open" id="mobile-menu-toggle" class="block text-white focus:outline-none xs:hidden md:hidden">
+        <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+            <path :class="{'hidden': open, 'inline-flex': !open}" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            <path :class="{'hidden': !open, 'inline-flex': open}" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+    </button>  
 
-    </button>
-    
     <!-- Mobile menu -->
-    <div id="mobile-menu" class="hidden absolute top-14 inset-x-0 transition transform origin-top-right">
+    <div id="mobile-menu" :class="{ 'block': open, 'hidden': !open }" class="hidden xs:hidden sm:hidden absolute top-14 inset-x-0 transition transform origin-top-right">
         <div class="shadow-lg opacity-85 bg-black divide-y divide-gray-100">
             <div class="px-5 py-6 text-right">
                 <a href="{{ url('/meeskonnad') }}" class="block py-2 text-white hover:text-orange-500">Meeskonnad</a>
@@ -30,7 +29,7 @@
 </div>
 
 <!-- Desktop menu -->
-<div class="hidden sm:flex md:flex flex-1 justify-end items-center">
+<div class="hidden sm:hidden md:flex lg:flex flex-1 justify-end items-center">
     @if (Route::has('login'))
         <nav class="flex flex-1 justify-end items-center">
             <x-g-nav-link href="{{ url('/meeskonnad') }}">Meeskonnad</x-g-nav-link>

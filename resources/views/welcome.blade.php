@@ -18,6 +18,7 @@
                 width: 100vw;
                 height: 320px;
             }
+
             .footer-img-container {
                 width: 100vw; 
                 height: auto; 
@@ -26,62 +27,45 @@
                 min-height: 18rem;
             }
 
-            @media (max-width: 475px) {
-                .sm\:custom-heading {
-                    font-size: 30px;
-                    text-transform: uppercase;
-                    text-align: center;
-                }
-                .logo{
-                    display: none;
-                }
-                .banner-container {
-                    height: 302px; 
-                }
+            .custom-heading {
+                font-size: 40px;
+                text-transform: uppercase;
+                text-align: center;
             }
-
-            @media (min-width: 476px) {
-                .sm\:custom-heading {
-                    font-size: 40px;
-                    text-transform: uppercase;
-                    text-align: center;
-                }
-                .banner-container {
-                    height: 318px;
-                }
-
+            .banner-container {
+                height: 165px;
             }
 
             @media (min-width: 768px) {
-                .md\:custom-heading {
-                    font-size: 50px;
+                .custom-heading {
+                    font-size: 54px;
                     text-transform: uppercase;
                     text-align: center;
                 }
                 .banner-container {
-                    height: 328px;
+                    height: 180px;
                 }
             }
 
             @media (min-width: 1024px) {
-                .lg\:custom-heading {
+                .custom-heading {
                     font-size: 80px;
                     text-transform: uppercase;
                     text-align: center;
                 }
                 .banner-container {
-                    height: 450px;
+                    height: 258px;
                 }
             }
 
             @media (min-width: 1260px) {
-                .lg\:custom-heading {
+                .custom-heading {
                     font-size: 110px;
                     text-transform: uppercase;
                     text-align: center;
                 }
                 .banner-container {
-                    height: 482px;
+                    height: 290px;
                 }
             }
 
@@ -114,7 +98,7 @@
         <header class="banner-container bg-banner-ball">
             <div class="min-h-screen flex flex-col items-center">
                 <div class="w-full max-w-2xl px-6 md:max-w-4xl lg:max-w-7xl">
-                    <div class="flex justify-between pt-4 pb-10 lg:pb-10">
+                    <div class="flex justify-between pt-4 pb-4">
                         <a href="./" class="flex items-center">
                             <h3 class="logo rounded-md px-3 py-2 text-white/90">
                                 Saare Spordiselts 
@@ -127,16 +111,16 @@
                         <x-guest-hamburger/>
 
                     </div>
-                    <div class="flex pb-2 pt-44 lg:pt-64 justify-center">
-                        <h1 class=" lg:custom-heading sm:custom-heading md:custom-heading lg:custom-heading lg:py-2 text-white">
+                    <div class="flex mb-2 pt-12 sm:pt-12 md:pt-12 lg:pt-24 justify-center">
+                        <h1 class="custom-heading text-white">
                             Saaremaa Korvpall
                         </h1>
                     </div>
                 </div>
             </div>
         </header>
-        <main class="my-10 relative bg-ball-basket flex-column bg-black text-white justify-items-center">
-            <div class="bg-black w-full flex justify-center py-4">
+        <main class="relative bg-ball-basket flex-column bg-black text-white justify-items-center">
+            <div class="bg-black w-full flex justify-center pb-5 pt-10">
                 @php
                     // Filter schedules to find the last game with statistics
                     $lastGameWithStats = $schedules->filter(function($schedule) {
@@ -173,7 +157,7 @@
                     <p>Statistikat veel ei ole</p>
                 @endif
             </div>
-            <div class="bg-black text-center pb-10">
+            <div class="bg-black text-center pb-5">
                 <a href="{{ url('/tulemused') }}" class="inline-flex items-center px-4 py-2 border-2 border-transparent rounded-md font-semibold text-xs text-orange-500/75 uppercase tracking-widest hover:text-white hover:bg-orange-500/75 focus:bg-orange-700 active:bg-orange-900/75 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:text-white focus:ring-offset-2 transition ease-in-out duration-150">
                     Vaata rohkem
                 </a>
@@ -227,7 +211,7 @@
                 </div>
             </div>
         </main>
-        <footer class="relative lg:py-5 text-center text-sm text-black dark:text-white/70">
+        <footer class="relative py-5 text-center text-sm text-black dark:text-white/70">
             <a href="https://www.facebook.com/saarespordiselts" class="rounded-md px-3 py-2 text-white ring-1 ring-transparent transition hover:text-orange-500 focus:outline-none focus-visible:ring-orange-500/90">
                 Saare Spordiselts MTÜ
             </a>
