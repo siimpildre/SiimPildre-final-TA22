@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <div class="mb-4 text-sm text-gray-200">
+    <div class="mb-4 text-sm text-gray-500">
         {{ __('Unustasid salasõna? Ei ole probleemi. Lihtsalt andke meile teada oma e-posti aadress ja me saadame Teile e-kirjaga parooli lähtestamise lingi, mis võimaldab Teil valida uue.') }}
     </div>
 

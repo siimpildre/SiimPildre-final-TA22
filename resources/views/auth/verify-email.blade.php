@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <div class="mb-4 text-sm text-gray-200">
+    <div class="mb-4 text-sm text-gray-500">
         {{ __('Täname registreerumast! Kas saaksite enne alustamist oma e-posti aadressi kinnitada, klõpsates lingil, mille just Teile meili saatsime? Kui Te e-kirja ei saanud, saadame Teile hea meelega uue.') }}
     </div>
 
@@ -23,7 +23,7 @@
         <form method="POST" action="{{ route('logout') }}">
             @csrf
 
-            <button type="submit" class="underline text-sm text-gray-200 hover:text-orange-500 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500">
+            <button type="submit" class="underline text-sm text-gray-500 hover:text-orange-500 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500">
                 {{ __('Logi välja') }}
             </button>
         </form>

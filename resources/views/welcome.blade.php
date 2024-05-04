@@ -185,7 +185,7 @@
                     <h2 class="text-center mb-4 lg:text-4xl flex justify-center" style="text-transform: uppercase;">
                         Järgmised mängud:
                     </h2>
-                    <div class="flex justify-center gap-6 sm:grid-cols-2 md:grid-cols-3 md:gap-3 lg:grid-cols-4 lg:gap-8">
+                    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 md:gap-3 lg:grid-cols-4 lg:gap-8">
                         @php 
                             $upcomingGames = $schedules->filter(function($schedule) {
                                 $dateTime = $schedule->date . ' ' . $schedule->time;

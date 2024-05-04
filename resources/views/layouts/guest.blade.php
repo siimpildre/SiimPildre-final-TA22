@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Saaremaa Korvpall') }}</title>
+        <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -15,53 +15,13 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
         <style>
-            .banner-container {
-                background-size: cover;
-                background-position: center;
-                width: 100vw;
-                height: 200px;
-            }
-
-            @media (max-width: 767px) {
-                .sm\:custom-heading {
-                    font-size: 40px;
-                    text-transform: uppercase;
-                    text-align: center;
-                }
-                .sm\:custom-heading {
-                    
-                }
-            }
-            @media (min-width: 768px) {
-                .md\:custom-heading {
-                    font-size: 50px;
-                    text-transform: uppercase;
-                    text-align: center;
-                }
-            }
-
-            @media (min-width: 1024px) {
-                .lg\:custom-heading {
-                    font-size: 80px;
-                    text-transform: uppercase;
-                    text-align: center;
-                }
-            }
-            @media (min-width: 1260px) {
-                .lg\:custom-heading {
-                    font-size: 110px;
-                    text-transform: uppercase;
-                    text-align: center;
-                }
-            }
-
             @layer utilities {
                 @keyframes spin {
                 0% {
                     transform: rotate(0deg);
                 }
                 100% {
-                    transform: rotate(360deg); 
+                    transform: rotate(360deg);
                 }
                 }
 
@@ -74,31 +34,28 @@
                 }
                 }
             }
-            
+            .banner-container {
+                background-size: cover;
+                background-position: center;
+                width: 100vw;
+                height: 320px;
+            }
         </style>
     </head>
-    <body x-data="{ open: false }" class="bg-black">
-        <header class="banner-container bg-banner-ball">
-            <div class="min-h-screen flex flex-col items-center">
-                <div class="w-full max-w-2xl px-6 lg:max-w-7xl">
-                    <div class="grid grid-cols-2 justify-between pt-4 pb-10 lg:pb-10 lg:grid-cols-2">
-                        <a href="./" class="flex items-center">
-                            <h3 class="rounded-md px-3 py-2 text-white/90">
-                                Saare Spordiselts 
-                            </h3>
-                            <div class="spin-on-load inline-block" style="animation: spin 3s ease-in-out;">
-                                <x-application-logo class="block h-9 w-auto fill-current text-gray-200" />
-                            </div>
-                        </a>
+    <body class="font-sans text-gray-900 antialiased bg-black">
+        <div class="bg-banner-ball banner-container bg-black-200">
+            <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0">
+                <div>
+                    <a href="./" class="spin-on-load inline-block" style="animation: spin 3s ease-in-out;">
+                     <x-application-logo class="block w-20 h-20 fill-current text-gray-300" />
+                    </a>
+                </div>
 
-                        <x-guest-hamburger/>
-
-                    </div>
+                <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
+                    {{ $slot }}
                 </div>
             </div>
-        </header>
-    <body class="font-sans text-gray-400 antialiased p-8">
-        {{ $slot }}
+        </div>
     </body>
 </html>
 
@@ -113,3 +70,4 @@
     });
   });
 </script>
+
