@@ -8,7 +8,7 @@
     </button>  
 
     <!-- Mobile menu -->
-    <div id="mobile-menu" :class="{ 'block': open, 'hidden': !open }" class="hidden xs:hidden sm:hidden absolute top-14 inset-x-0 transition transform origin-top-right">
+    <div id="mobile-menu" :class="{ 'block': open, 'hidden': !open }" class="hidden xs:hidden absolute top-14 inset-x-0 transition transform origin-top-right">
         <div class="shadow-lg opacity-85 bg-black divide-y divide-gray-100">
             <div class="px-5 py-6 text-right">
                 <a href="{{ url('/meeskonnad') }}" class="block py-2 text-white hover:text-orange-500">Meeskonnad</a>
