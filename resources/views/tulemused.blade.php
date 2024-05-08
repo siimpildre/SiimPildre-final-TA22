@@ -115,15 +115,3 @@
         <x-footer></x-footer>
     </body>
 </html>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const link = document.querySelector('.spin-on-load');
-
-    link.addEventListener('mouseenter', function() {
-      this.style.animation = 'none'; 
-      void this.offsetWidth;
-      this.style.animation = 'spin-hover 1.5s ease-in-out 1'; 
-    });
-  });
-</script>
