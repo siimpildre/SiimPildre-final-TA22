@@ -163,7 +163,6 @@
                 </a>
             </div>
 
-
             <div class="bg-black relative bg-ball-basket footer-img-container flex justify-center">
                 <div class="w-full max-w-2xl p-6 lg:max-w-7xl flex-column justify-center">
                     <h2 class="text-center mb-4 lg:text-4xl flex justify-center" style="text-transform: uppercase;">

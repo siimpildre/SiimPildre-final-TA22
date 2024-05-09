@@ -13,13 +13,16 @@ use App\Models\Team;
 use App\Models\Player;
 use App\Models\Schedule;
 use App\Models\Statistic;
+use App\Models\Chirp;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 
 
 Route::get('/', function () {
     $schedules = Schedule::all();
-    return view('welcome', ['schedules' => $schedules]);
+    return view('welcome', [
+        'schedules' => $schedules,
+    ]);
 });
 
 Route::get('/dashboard', function () {
@@ -36,6 +39,9 @@ Route::get('/tulemused', [TulemusedController::class, 'index'])->name('tulemused
 Route::fallback(function () {
     return View::make('errors.404');
 });
+
+Route::get('/', 'WelcomeController@welcome');
+
 
 
 Route::middleware('auth')->group(function () {
