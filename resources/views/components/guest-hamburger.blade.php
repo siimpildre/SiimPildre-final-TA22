@@ -10,7 +10,7 @@
     <!-- Mobile menu -->
     <div id="mobile-menu" :class="{ 'block': open, 'hidden': !open }" class="hidden xs:hidden absolute top-14 inset-x-0 transition transform origin-top-right">
         <div class="shadow-lg opacity-85 bg-black divide-y divide-gray-100">
-            <div class="px-5 py-6 text-right">
+            <div class="px-5 py-6 text-right relative">
                 <a href="{{ url('/meeskonnad') }}" class="block py-2 text-white hover:text-orange-500">Meeskonnad</a>
                 <a href="{{ url('/mangijad') }}" class="block py-2 text-white hover:text-orange-500">Mängijad</a>
                 <a href="{{ url('/tulemused') }}" class="block py-2 text-white hover:text-orange-500">Tulemused</a>
