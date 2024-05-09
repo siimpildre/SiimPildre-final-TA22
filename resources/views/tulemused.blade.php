@@ -73,8 +73,8 @@
             </div>
         </header>
     <body class="font-sans text-gray-400 antialiased">
-    <main class="p-8 my-10 relative flex-column bg-black text-grey justify-center">
-        <div class="bg-black relative w-full">
+    <main class="p-8 my-10 flex-column bg-black text-grey justify-center">
+        <div class="bg-black mb-10 w-full">
             <table class="w-full rounded-lg p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:ring-black/20 focus:outline-none lg:pb-10 bg-zinc-900/80 hover:bg-zinc-900/95 ring-zinc-800 hover:text-orange-500 hover:ring-zinc-700 focus-visible:ring-orange-500 spin-on-load">
                 <thead class="text-orange-600 text-center">
                     <tr>
