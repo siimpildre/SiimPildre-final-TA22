@@ -13,6 +13,11 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        <script>
+            document.getElementById('team').addEventListener('change', function() {
+                document.getElementById('filterForm').submit();
+            });
+        </script>
 
         <style>
             .banner-container {
@@ -75,31 +80,48 @@
     <body class="font-sans text-gray-400 antialiased">
         <main class="p-8 my-10 bg-black text-gray-900">
             <div class="mb-10 w-full rounded-lg p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:ring-black/20 focus:outline-none lg:pb-10 bg-zinc-100/90 hover:bg-zinc-100/95 ring-zinc-800 hover:text-orange-500 hover:ring-zinc-700 focus-visible:ring-orange-500">
+                <!-- filter -->
+                <form id="filterForm" action="{{ route('players.index') }}" method="GET">
+                    @csrf
+                    <label for="team">Filter by Team:</label>
+                    <select name="team" id="team">
+                        <option value="">All Teams</option>
+                        @foreach ($teams as $team)
+                            <option value="{{ $team->id }}" {{ Request::get('team') == $team->id ? 'selected' : '' }}>
+                                {{ $team->team_name }}
+                            </option>
+                        @endforeach
+                    </select>
+                    <button type="submit">Filter</button>
+                </form>
+
                 <table class="w-full rounded-lg p-6 transition duration-300 focus:outline-none lg:pb-10 bg-zinc-100/80 hover:bg-zinc-100/95 hover:text-orange-500 focus-visible:ring-orange-500">
                     <thead class="text-orange-600 text-center">
                         <tr>
-                            <th>Meeskonnanimi</th>
-                            <th class="hidden lg:table-cell">Lühend</th>
-                            <th>Treener</th>
-                            <th>Kontakt</th>
+                            <th>Nimi</th>
+                            <th>Meeskond</th>
+                            <th>Särgi number</th>
+                            <th class="hidden lg:table-cell">Positsiooni number</th>
+                            <th class="hidden lg:table-cell">Sünniaeg</th>
+                            <th class="hidden lg:table-cell">Pikkus</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($teams as $team)
-                        
-                            <tr onclick="window.location='{{ route('teams.show', $team->id) }}';" style="cursor:pointer;" class="border-1 justify-between text-zinc-900 items-center text-center transition duration-300 ease-in-out hover:text-orange-500 hover:bg-zinc-100/90">
+                        @foreach ($players as $player)
+                            <tr onclick="window.location='{{ route('players.show', $player->id) }}';" style="cursor:pointer;" class="border-1 justify-between text-zinc-900 items-center text-center transition duration-300 ease-in-out hover:text-orange-500 hover:bg-zinc-100/90">
+                                <td> {{ $player->first_name }} {{ $player->last_name }}</td>
                                 <td>
-                                    {{ $team->team_name }} 
+                                @foreach ($player->teams as $team)
+                                    {{ $team->team_name }}
+                                    @unless ($loop->last)
+                                        <br>
+                                    @endunless
+                                @endforeach
                                 </td>
-                                <td>
-                                    {{ $team->short_name }}
-                                </td>
-                                <td>
-                                    {{ $team->coach }}
-                                </td>
-                                <td>
-                                    {{ $team->contact_nr }}
-                                </td>
+                                <td>{{ $player->jersey_nr }}</td>
+                                <td class="hidden lg:table-cell">{{ $player->pos_nr }}</td>
+                                <td class="hidden lg:table-cell">{{ date('d.m.Y', strtotime($player->birth_date)) }}</td>
+                                <td class="hidden lg:table-cell">{{ $player->height }}</td>
                             </tr>
                         @endforeach
                     </tbody>

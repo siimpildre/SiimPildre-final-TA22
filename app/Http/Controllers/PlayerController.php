@@ -127,4 +127,23 @@ class PlayerController extends Controller
         $players = Player::all(); 
         return view('mangijad', ['players' => $players]);
     }
+
+    public function filterPlayers(Request $request)
+    {
+        $teams = Team::all(); // Fetch all teams for dropdown
+        $playersQuery = Player::query();
+    
+        if ($request->has('team') && $request->team !== '') {
+            // If a team is selected, filter players by team
+            $playersQuery->whereHas('teams', function ($query) use ($request) {
+                $query->where('team_id', $request->team);
+            });
+        }
+    
+        $players = $playersQuery->get();
+    
+        // Pass $teams variable to the view
+        return view('your.view', compact('players', 'teams'));
+    }
+    
 }

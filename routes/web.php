@@ -44,10 +44,11 @@ Route::fallback(function () {
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 
 Route::get('/teams/{team}', [TeamController::class, 'show'])->name('teams.show');
+Route::get('/players/{player}', [PlayerController::class, 'show'])->name('players.show');
 
 Route::middleware('auth')->group(function () {
     Route::resource("teams", TeamController::class)->except(['show']);
-    Route::resource("players", PlayerController::class); //->except(['show']);
+    Route::resource("players", PlayerController::class)->except(['show']);
     Route::resource("schedules", ScheduleController::class);
     Route::resource("statistics", StatisticController::class);
 
