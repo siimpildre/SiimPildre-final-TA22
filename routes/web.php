@@ -34,23 +34,22 @@ Route::get('/tulemused', function () {
     return view('tulemused', ['schedules' => $schedules]);
 });
 Route::get('/tulemused', [TulemusedController::class, 'index'])->name('tulemused.index');
-
-Route::get('/teams/meeskonnad', [TeamController::class, 'showMeeskonnadPage']);
+Route::get('/meeskonnad', [TeamController::class, 'showMeeskonnadPage'])->name('meeskonnad');
+Route::get('/mangijad', [PlayerController::class, 'showMangijadPage'])->name('mangijad');
 
 Route::fallback(function () {
     return View::make('errors.404');
 });
 
-Route::get('/welcome', [WelcomeController::class, 'index'])->name('welcome.index');
+Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
+
+Route::get('/teams/{team}', [TeamController::class, 'show'])->name('teams.show');
 
 Route::middleware('auth')->group(function () {
-    Route::resource("teams", TeamController::class);
-    Route::resource("players", PlayerController::class);
+    Route::resource("teams", TeamController::class)->except(['show']);
+    Route::resource("players", PlayerController::class); //->except(['show']);
     Route::resource("schedules", ScheduleController::class);
     Route::resource("statistics", StatisticController::class);
-
-    Route::get('/welcome', [WelcomeController::class, 'index'])->name('welcome.index');
-
 
     Route::get('/statistics/create', [StatisticController::class, 'create'])->name('statistics.create');
 

@@ -141,7 +141,7 @@ class TeamController extends Controller
     public function showMeeskonnadPage()
     {
         $teams = Team::all(); 
-        return view('teams.meeskonnad', ['teams' => $teams]);
+        return view('meeskonnad', ['teams' => $teams]);
     }
 
 }

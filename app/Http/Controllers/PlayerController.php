@@ -120,5 +120,11 @@ class PlayerController extends Controller
     {
         $book->delete();
         return redirect('/players');
-}
+    }
+
+    public function showMangijadPage()
+    {
+        $players = Player::all(); 
+        return view('mangijad', ['players' => $players]);
+    }
 }
