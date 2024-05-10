@@ -33,16 +33,15 @@ Route::get('/tulemused', function () {
     $schedules = Schedule::all();
     return view('tulemused', ['schedules' => $schedules]);
 });
-
 Route::get('/tulemused', [TulemusedController::class, 'index'])->name('tulemused.index');
+
+Route::get('/teams/meeskonnad', [TeamController::class, 'showMeeskonnadPage']);
 
 Route::fallback(function () {
     return View::make('errors.404');
 });
 
-Route::get('/', 'WelcomeController@welcome');
-
-
+Route::get('/welcome', [WelcomeController::class, 'index'])->name('welcome.index');
 
 Route::middleware('auth')->group(function () {
     Route::resource("teams", TeamController::class);

@@ -138,4 +138,10 @@ class TeamController extends Controller
         return redirect()->back();
     }
 
+    public function showMeeskonnadPage()
+    {
+        $teams = Team::all(); 
+        return view('teams.meeskonnad', ['teams' => $teams]);
+    }
+
 }

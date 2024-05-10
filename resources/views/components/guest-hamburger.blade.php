@@ -13,7 +13,7 @@
             <div class="px-5 py-6 text-right relative">
                 <a href="{{ url('/meeskonnad') }}" class="block py-2 text-white hover:text-orange-500">Meeskonnad</a>
                 <a href="{{ url('/mangijad') }}" class="block py-2 text-white hover:text-orange-500">Mängijad</a>
-                <a href="{{ url('/tulemused') }}" class="block py-2 text-white hover:text-orange-500">Tulemused</a>
+                <a href="{{ url('/teams/tulemused') }}" class="block py-2 text-white hover:text-orange-500">Tulemused</a>
                 @auth
                     <a href="{{ url('/dashboard') }}" class="block py-2 text-white hover:text-orange-500">Töölaud</a>
                     <a href="{{ route('logout') }}" class="block py-2 text-white hover:text-orange-500">Logi välja</a>
@@ -32,7 +32,7 @@
 <div class="hidden sm:hidden md:flex lg:flex flex-1 justify-end items-center">
     @if (Route::has('login'))
         <nav class="flex flex-1 justify-end items-center">
-            <x-g-nav-link href="{{ url('/meeskonnad') }}">Meeskonnad</x-g-nav-link>
+            <x-g-nav-link href="{{ url('/teams/meeskonnad') }}">Meeskonnad</x-g-nav-link>
             <x-g-nav-link href="{{ url('/mangijad') }}">Mängijad</x-g-nav-link>
             <x-g-nav-link href="{{ url('/tulemused') }}">Tulemused</x-g-nav-link>
             @auth
