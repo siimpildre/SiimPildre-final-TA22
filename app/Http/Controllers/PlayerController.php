@@ -3,25 +3,28 @@
 namespace App\Http\Controllers;
 
 use App\Models\Player;
+use App\Models\Team;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 
 class PlayerController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return view("players.index", [
-            "players" => Player::paginate(20),
-        ]);
-    }
+        $teams = Team::all(); // Fetch all teams for the dropdown
+        $playersQuery = Player::query();
 
-        /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        return view('players.store');
+        if ($request->has('team') && $request->team !== '') {
+            // If a team is selected, filter players by team
+            $playersQuery->whereHas('teams', function ($query) use ($request) {
+                $query->where('team_id', $request->team);
+            });
+        }
+
+        $players = $playersQuery->paginate(20); // Use paginate instead of get()
+
+        return view('players.index', compact('players', 'teams'));
     }
 
     /**
