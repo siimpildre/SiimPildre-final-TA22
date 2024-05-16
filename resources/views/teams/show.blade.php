@@ -138,9 +138,9 @@
                     </div>
                 </div>
             </header>
-            <main class="p-8 my-10 bg-black text-grey">
-                <div class="mb-10 w-full rounded-lg p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:ring-black/20 focus:outline-none lg:pb-10 bg-zinc-100/90 hover:bg-zinc-100/95 ring-zinc-800 hover:text-orange-500 hover:ring-zinc-700 focus-visible:ring-orange-500">
-                    <div class="text-orange-900 grid grid-cols-1 pt-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <main class="p-8 my-10 bg-black text-gray-900">
+                <div class="mb-10 w-full p rounded-lg p-6 lg:p-12  ring-1 ring-white/[0.05] transition duration-300 hover:ring-black/20 focus:outline-none bg-zinc-100/90 ring-zinc-800 hover:ring-zinc-700 focus-visible:ring-orange-500">
+                    <div class="text-orange-900 grid grid-cols-1 p-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-7xl">
                         <div>
                             <x-input-label for="title" value="Meeskonnanimi" />
                             {{ old('title', $team->team_name ) }}
@@ -159,10 +159,10 @@
                         </div>
                     </div>
                     <div>
-                        <div class="p-6 text-gray-900">
-                            <table class="w-full rounded-lg p-6 transition duration-300 focus:outline-none lg:pb-10 bg-zinc-100/80 hover:bg-zinc-100/95 hover:text-orange-500 focus-visible:ring-orange-500">
-                                <thead class="text-left">
-                                    <tr class="text-orange-600 text-center">
+                        <div class="p-6 shadow-lg rounded-lg transition duration-300 focus:outline-none bg-zinc-100/80 hover:bg-zinc-100/95 hover:text-orange-500 focus-visible:ring-orange-500">
+                            <table class="w-full s">
+                                <thead class="text-orange-600 text-center">
+                                    <tr>
                                         <th>Eesnimi</th>
                                         <th>Perekonnanimi</th>
                                         <th>Särgi number</th>
@@ -173,7 +173,7 @@
                                 </thead>
                                 <tbody>
                                 @foreach ($players as $player)
-                                    <tr onclick="window.location='{{ route('players.show', $player->id) }}';" style="cursor:pointer;" class="border-1 justify-between text-zinc-900 items-center text-center transition duration-300 ease-in-out hover:text-orange-500">
+                                    <tr onclick="window.location='{{ route('players.show', $player->id) }}';" style="cursor:pointer;" class="border-t justify-between text-zinc-900 items-center transition duration-300 ease-in-out text-center hover:text-orange-500 hover:bg-gray-200">
                                         <td>
                                             {{ $player->first_name }} 
                                         </td>
@@ -199,10 +199,8 @@
                             </table>
                         </div>
                     </div>
-                    <div class="py-6 px-8">
-                        <div class="mt-4 space-x-2">
-                            <a class="hover:text-zinc-900" href="{{ route('meeskonnad') }}">{{ __('Tagasi') }}</a>
-                        </div>
+                    <div class="pt-6 lg:pt-12 space-x-2">
+                        <a class="hover:text-orange-500" href="{{ route('meeskonnad') }}">{{ __('Tagasi') }}</a>
                     </div>
                 </div>
             </main> 

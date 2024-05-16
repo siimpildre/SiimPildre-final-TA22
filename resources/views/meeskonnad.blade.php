@@ -74,40 +74,40 @@
         </header>
     <body class="font-sans text-gray-400 antialiased">
         <main class="p-8 my-10 bg-black text-gray-900">
-            <div class="mb-10 w-full rounded-lg p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:ring-black/20 focus:outline-none lg:pb-10 bg-zinc-100/90 hover:bg-zinc-100/95 ring-zinc-800 hover:text-orange-500 hover:ring-zinc-700 focus-visible:ring-orange-500">
-                <table class="w-full rounded-lg p-6 transition duration-300 focus:outline-none lg:pb-10 bg-zinc-100/80 hover:bg-zinc-100/95 hover:text-orange-500 focus-visible:ring-orange-500">
-                    <thead class="text-orange-600 text-center">
-                        <tr>
-                            <th>Meeskonnanimi</th>
-                            <th class="hidden lg:table-cell">Lühend</th>
-                            <th>Treener</th>
-                            <th>Kontakt</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($teams as $team)
-                        
-                            <tr onclick="window.location='{{ route('teams.show', $team->id) }}';" style="cursor:pointer;" class="border-1 justify-between text-zinc-900 items-center text-center transition duration-300 ease-in-out hover:text-orange-500 hover:bg-zinc-100/90">
-                                <td>
-                                    {{ $team->team_name }} 
-                                </td>
-                                <td>
-                                    {{ $team->short_name }}
-                                </td>
-                                <td>
-                                    {{ $team->coach }}
-                                </td>
-                                <td>
-                                    {{ $team->contact_nr }}
-                                </td>
+            <div class="mb-10 w-full p rounded-lg p-6 lg:p-12 ring-1 ring-white/[0.05] transition duration-300 hover:ring-black/20 focus:outline-none bg-zinc-100/90 ring-zinc-800 hover:ring-zinc-700 focus-visible:ring-orange-500">
+                <div class="p-6 shadow-lg rounded-lg transition duration-300 focus:outline-none bg-zinc-100/80 hover:bg-zinc-100/95 hover:text-orange-500 focus-visible:ring-orange-500">
+                    <table class="w-full">
+                        <thead class="text-orange-600 ">
+                            <tr>
+                                <th>Meeskonnanimi</th>
+                                <th class="hidden lg:table-cell">Lühend</th>
+                                <th class="hidden sm:table-cell md:table-cell lg:table-cell">Treener</th>
+                                <th class="hidden md:table-cell lg:table-cell">Kontakt</th>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-                <div class="py-6 px-8">
-                    <div class="mt-4 space-x-2">
-                        <a class="hover:text-zinc-900" href="{{ route('welcome') }}">{{ __('Tagasi') }}</a>
-                    </div>
+                        </thead>
+                        <tbody>
+                            @foreach ($teams as $team)
+                            
+                                <tr onclick="window.location='{{ route('teams.show', $team->id) }}';" style="cursor:pointer;" class="border-t justify-between text-zinc-900 items-center transition duration-300 ease-in-out text-center hover:text-orange-500 hover:bg-gray-200">
+                                    <td>
+                                        {{ $team->team_name }} 
+                                    </td>
+                                    <td class="hidden lg:table-cell">
+                                        {{ $team->short_name }}
+                                    </td>
+                                    <td class="hidden sm:table-cell md:table-cell lg:table-cell">
+                                        {{ $team->coach }}
+                                    </td>
+                                    <td class="hidden md:table-cell lg:table-cell">
+                                        {{ $team->contact_nr }}
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <div class="pt-6 lg:pt-12 space-x-2">
+                    <a class="hover:text-orange-500" href="{{ route('welcome') }}">{{ __('Tagasi') }}</a>
                 </div>
             </div>
         </main> 

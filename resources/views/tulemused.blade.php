@@ -73,45 +73,52 @@
             </div>
         </header>
     <body class="font-sans text-gray-400 antialiased">
-    <main class="p-8 my-10 flex-column bg-black text-grey justify-center">
-        <div class="bg-black mb-10 w-full">
-            <table class="w-full rounded-lg p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:ring-black/20 focus:outline-none lg:pb-10 bg-zinc-900/80 hover:bg-zinc-900/95 ring-zinc-800 hover:text-orange-500 hover:ring-zinc-700 focus-visible:ring-orange-500 spin-on-load">
-                <thead class="text-orange-600 text-center">
-                    <tr>
-                        <th>Tiim 1</th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th>Tiim 2</th>
-                        <th>Kuupäev</th>
-                        <th>Kellaaeg</th>
-                        <th class="hidden lg:table-cell">Asukoht</th>
-                        <th class="hidden lg:table-cell">Tüüp</th>
-                        <th ></th>
-                        <th class="hidden lg:table-cell"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($schedules as $schedule)
-                    @php
-                        $team1Points = $schedule->statistics()->where('team_id', $schedule->team1_id)->sum('points');
-                        $team2Points = $schedule->statistics()->where('team_id', $schedule->team2_id)->sum('points');
-                    @endphp
-                    <tr class="border-b justify-between text-orange-500 items-center text-center transition duration-300 ease-in-out hover:text-orange-600 hover:bg-gray-800">
-                        <td>{{ $schedule->team1->team_name ?? 'Meeskonda ei leitud' }}</td>
-                        <td>{{ $team1Points }}</td>
-                        <td>:</td>
-                        <td>{{ $team2Points }}</td>
-                        <td>{{ $schedule->team2->team_name ?? 'Meeskonda ei leitud' }}</td>
-                        <td>{{ date('d.m.Y', strtotime($schedule->date)) }}</td>
-                        <td>{{ date('H:i', strtotime($schedule->time)) }}</td>
-                        <td class="hidden lg:table-cell">{{ $schedule->venue }}</td>
-                        <td class="hidden lg:table-cell">{{ $schedule->stages }}</td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
+        <main class="p-8 my-10 bg-black text-gray-900">
+            <div class="mb-10 w-full p rounded-lg p-6 lg:p-12 ring-1 ring-white/[0.05] transition duration-300 hover:ring-black/20 focus:outline-none bg-zinc-100/90 ring-zinc-800 hover:ring-zinc-700 focus-visible:ring-orange-500">
+                <div class="p-6 shadow-lg rounded-lg transition duration-300 focus:outline-none bg-zinc-100/80 hover:bg-zinc-100/95 hover:text-orange-500 focus-visible:ring-orange-500">
+                    <table class="w-full ">
+                        <thead class="text-orange-600">
+                            <tr>
+                                <th>Kodus</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th>Võõrsil</th>
+                                <th class="hidden md:table-cell lg:table-cell">Kuupäev</th>
+                                <th class="hidden sm:table-cell md:table-cell lg:table-cell">Kellaaeg</th>
+                                <th class="hidden lg:table-cell">Asukoht</th>
+                                <th class="hidden lg:table-cell">Tüüp</th>
+                                <th ></th>
+                                <th class="hidden lg:table-cell"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($schedules as $schedule)
+                            @php
+                                $team1Points = $schedule->statistics()->where('team_id', $schedule->team1_id)->sum('points');
+                                $team2Points = $schedule->statistics()->where('team_id', $schedule->team2_id)->sum('points');
+                            @endphp
+                            <tr class="border-t justify-between text-zinc-900 items-center transition duration-300 ease-in-out text-center hover:text-orange-500 hover:bg-gray-200">
+                                <td>{{ $schedule->team1->team_name ?? 'Meeskonda ei leitud' }}</td>
+                                <td>{{ $team1Points > 0 ? $team1Points : '' }}</td>
+                                <td>:</td>
+                                <td>{{ $team2Points > 0 ? $team1Points : '' }}</td>
+                                <td>{{ $schedule->team2->team_name ?? 'Meeskonda ei leitud' }}</td>
+                                <td class="hidden md:table-cell lg:table-cell">{{ date('d.m.Y', strtotime($schedule->date)) }}</td>
+                                <td class="hidden sm:table-cell md:table-cell lg:table-cell">{{ date('H:i', strtotime($schedule->time)) }}</td>
+                                <td class="hidden lg:table-cell">{{ $schedule->venue }}</td>
+                                <td class="hidden lg:table-cell">{{ $schedule->stages }}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                        </div>
+                    </table>
+                </div>
+                <div class="pt-6 space-x-2 lg:pt-12">
+                    <a class="hover:text-orange-500" href="{{ route('welcome') }}">{{ __('Tagasi') }}</a>
+                </div>
+            </div>
+        </main> 
         <x-footer></x-footer>
     </body>
 </html>
