@@ -164,11 +164,11 @@
                                 <thead class="text-orange-600 text-center">
                                     <tr>
                                         <th>Eesnimi</th>
-                                        <th>Perekonnanimi</th>
+                                        <th>Perenimi</th>
                                         <th>Särgi number</th>
-                                        <th>Positsiooni number</th>
-                                        <th>Sünniaeg</th>
-                                        <th>Pikkus</th>
+                                        <th class="hidden lg:table-cell">Positsiooni number</th>
+                                        <th class="hidden lg:table-cell">Sünniaeg</th>
+                                        <th class="hidden md:table-cell lg:table-cell">Pikkus</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -183,13 +183,13 @@
                                         <td>
                                             {{ $player->jersey_nr }}
                                         </td>
-                                        <td>
+                                        <td class="hidden lg:table-cell">
                                             {{ $player->pos_nr }}
                                         </td>
-                                        <td>
+                                        <td class="hidden lg:table-cell">
                                             {{ \Carbon\Carbon::parse($player->birth_date)->format('d.m.Y') }}
                                         </td>
-                                        <td>
+                                        <td class="hidden md:table-cell lg:table-cell">
                                             {{ $player->height }}
                                         </td>
                                     </tr>
