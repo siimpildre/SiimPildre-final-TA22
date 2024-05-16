@@ -75,7 +75,7 @@
         <main class="p-8 my-10 bg-black text-gray-900">
             <div class="mb-10 w-full p rounded-lg p-6 lg:p-12 ring-1 ring-white/[0.05] transition duration-300 hover:ring-black/20 focus:outline-none bg-zinc-100/90 ring-zinc-800 hover:ring-zinc-700 focus-visible:ring-orange-500">
                 <div class="p-6 shadow-lg rounded-lg transition duration-300 focus:outline-none bg-zinc-100/80 hover:bg-zinc-100/95 hover:text-orange-500 focus-visible:ring-orange-500">
-                    <table class="w-full ">
+                    <table class="w-full">
                         <thead class="text-orange-600">
                             <tr>
                                 <th>Kodus</th>

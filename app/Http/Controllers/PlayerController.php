@@ -66,12 +66,11 @@ class PlayerController extends Controller
      */
     public function show(Player $player): View
     {
-        return view('players.show', [
-
-            'player' => $player,
-            'teams' => $player -> teams
-
-        ]);
+        // Fetch player's statistics
+        $statistics = $player->statistics;
+        
+        // Pass the player and their statistics to the view
+        return view('players.show', compact('player', 'statistics'));
     }
     
     /**

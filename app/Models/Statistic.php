@@ -30,4 +30,5 @@ class Statistic extends Model
     {
         return $this->belongsTo(Player::class);
     }
+
 }

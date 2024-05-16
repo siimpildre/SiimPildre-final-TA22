@@ -20,4 +20,9 @@ class Player extends Model
         return $this->belongsToMany(Team::class, 'team_players');
     }
 
+    public function statistics()
+    {
+        return $this->hasMany(Statistic::class);
+    }
+
 }
