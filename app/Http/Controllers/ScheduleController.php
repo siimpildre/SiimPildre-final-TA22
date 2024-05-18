@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Schedule;
 use App\Models\Player;
 use App\Models\Team;
-use App\Models\Statistics;
+use App\Models\Statistic;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Response;
+use Illuminate\Support\Collection;
 
 class ScheduleController extends Controller
 {
@@ -83,11 +84,26 @@ class ScheduleController extends Controller
         $team1 = Team::findOrFail($schedule->team1_id);
         $team2 = Team::findOrFail($schedule->team2_id);
 
+        // Fetch statistics related to this schedule for each team
+        $statisticsTeam1 = Statistic::where('schedule_id', $schedule->id)
+            ->where('team_id', $schedule->team1_id)
+            ->get();
+
+        $statisticsTeam2 = Statistic::where('schedule_id', $schedule->id)
+            ->where('team_id', $schedule->team2_id)
+            ->get();
+            
+        $statisticsTeam1 = $statisticsTeam1->sortByDesc('points');
+        $statisticsTeam2 = $statisticsTeam2->sortByDesc('points');
+        
+
         // Pass the schedule and team names to the view
         return view('schedules.show', [
             'schedule' => $schedule,
             'team1_name' => $team1->team_name,
             'team2_name' => $team2->team_name,
+            'statisticsTeam1' => $statisticsTeam1,
+            'statisticsTeam2' => $statisticsTeam2,
         ]);
     }
 

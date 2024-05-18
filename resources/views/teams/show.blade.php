@@ -180,7 +180,7 @@
                             <table class="w-full s">
                                 <thead class="text-orange-600 text-center">
                                     <tr>
-                                        <th>Nimi</th>
+                                        <th class="text-left">Nimi</th>
                                         <th>Särgi number</th>
                                         <th class="hidden lg:table-cell">Positsiooni number</th>
                                         <th class="hidden lg:table-cell">Sünniaeg</th>
@@ -190,7 +190,7 @@
                                 <tbody>
                                 @foreach ($players as $player)
                                     <tr onclick="window.location='{{ route('players.show', $player->id) }}';" style="cursor:pointer;" class="border-t justify-between text-zinc-900 items-center transition duration-300 ease-in-out text-center hover:text-orange-500 hover:bg-gray-200">
-                                        <td>
+                                        <td class="text-left">
                                             {{ $player->first_name }} {{ $player->last_name }}
                                         </td>
                                         <td>

@@ -258,7 +258,7 @@
                             <table class="w-full">
                                 <thead>
                                     <tr class="text-orange-600">
-                                        <th>Vastane</th>
+                                        <th class="text-left">Vastane</th>
                                         <th>Särgi nr</th>
                                         <th>Minutid</th>
                                         <th>3-p</th>
@@ -273,7 +273,7 @@
                                 <tbody>
                                     @foreach ($statistics as $stat)
                                         <tr onclick="window.location='{{ route('schedules.show', $stat->schedule_id) }}';" style="cursor:pointer;" class="border-t justify-between text-zinc-900 items-center transition duration-300 ease-in-out text-center hover:text-orange-500 hover:bg-gray-200">
-                                            <td>
+                                            <td class="text-left">
                                                 @if ($stat->schedule->team1_id != $stat->team_id)
                                                     {{ $stat->schedule->team1->team_name }}
                                                 @else
