@@ -43,14 +43,15 @@ Route::fallback(function () {
 
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 
-Route::get('/teams/{team}', [TeamController::class, 'show'])->name('teams.show');
-Route::get('/players/{player}', [PlayerController::class, 'show'])->name('players.show');
+Route::get('/meeskonnad/{team}', [TeamController::class, 'show'])->name('teams.show');
+Route::get('/mangijad/{player}', [PlayerController::class, 'show'])->name('players.show');
+Route::get('/tulemused/{schedule}', [ScheduleController::class, 'show'])->name('schedules.show');
 
 Route::middleware('auth')->group(function () {
     Route::resource("teams", TeamController::class)->except(['show']);
     Route::resource("players", PlayerController::class)->except(['show']);
-    Route::resource("schedules", ScheduleController::class);
-    Route::resource("statistics", StatisticController::class);
+    Route::resource("schedules", ScheduleController::class)->except(['show']);
+    Route::resource("statistics", StatisticController::class)->except(['show']);
 
     Route::get('/statistics/create', [StatisticController::class, 'create'])->name('statistics.create');
 

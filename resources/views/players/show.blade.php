@@ -1,104 +1,122 @@
 @if (Route::has('login'))
     @auth
-        <x-app-layout>
-            <x-slot name="header">
-                <h2 class="font-semibold text-2xl text-gray-800 leading-tight">
-                    {{ $player->first_name . ' ' . $player->last_name }}
-                </h2>
-                <h2 class="font-semibold text-xl text-gray-600 leading-tight"> 
-                    @if ($player->teams->count() > 0)
-                    @foreach ($player->teams as $team)
-                        {{ $team->team_name }}
-                    @endforeach
-                    @else
-                        <p class="text-rose-700">Vaba mängija</p>
-                    @endif
-                </h2>
+    <x-app-layout>
+        <x-slot name="header">
+            <h2 class="font-semibold text-2xl text-gray-800 leading-tight">
+                {{ $player->first_name . ' ' . $player->last_name }}
+            </h2>
+            <h2 class="font-semibold text-xl text-gray-600 leading-tight"> 
+                @if ($player->teams->count() > 0)
+                @foreach ($player->teams as $team)
+                    {{ $team->team_name }}
+                @endforeach
+                @else
+                    <p class="text-rose-700">Vaba mängija</p>
+                @endif
+            </h2>
 
-            </x-slot>
+        </x-slot>
 
-            <div class="py-12">
-                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                        <div class="p-6 text-gray-900">
-                            <ul class="grid grid-cols-1 lg:grid-cols-2 gap-4 pb-6">
+        <div class="py-12">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="p-6 text-gray-900">
+                        <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 pb-6">
+                            <li>
+                            <x-input-label for="title" value="Särgi number" />
+                            {{ old('title', $player->jersey_nr) }}
+                            </li>
+                            <li>
+                            <x-input-label for="title" value="Positsioon" />
+                            {{ old('title', $player->pos_nr) }}
+                            </li>
+                            <li>
+                            <x-input-label for="title" value="Sünniaeg" />
+                            {{ old('title', date('d.m.Y', strtotime($player->birth_date))) }}
+                            </li>
+                            <li>
+                            <x-input-label for="title" value="Pikkus" />
+                            {{ old('title', $player->height) }}
+                            </li>
+                        </ul>
+                        <div class="p-6 mb-6 mt-6 shadow-lg rounded-lg transition duration-300 focus:outline-none bg-zinc-100/80 hover:bg-zinc-100/95 focus-visible:ring-orange-500">
+                            <h2 class="text-lg font-semibold text-orange-600 mb-4">Mängija keskmised</h2>
+                            <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 pb-6">
                                 <li>
-                                <x-input-label for="title" value="Eesnimi" />
-                                {{ old('title', $player->first_name) }}
+                                    <span class="font-semibold">Punktid:</span> {{ number_format($averagePoints, 2) }}
                                 </li>
                                 <li>
-                                <x-input-label for="title" value="Perekonnanimi" />
-                                {{ old('title', $player->last_name) }}
+                                    <span class="font-semibold">Kolmesed:</span> {{ number_format($averageThreeP, 2) }}
                                 </li>
                                 <li>
-                                <x-input-label for="title" value="Särgi number" />
-                                {{ old('title', $player->jersey_nr) }}
+                                    <span class="font-semibold">Vead:</span> {{ number_format($averageFouls, 2) }}
                                 </li>
                                 <li>
-                                <x-input-label for="title" value="Positsioon" />
-                                {{ old('title', $player->pos_nr) }}
+                                    <span class="font-semibold">Tehnilised:</span> {{ number_format($averageTech, 2) }}
                                 </li>
                                 <li>
-                                <x-input-label for="title" value="Sünniaeg" />
-                                {{ old('title', date('d.m.Y', strtotime($player->birth_date))) }}
+                                    <span class="font-semibold">Ebasportlikud:</span> {{ number_format($averageUnspo, 2) }}
                                 </li>
                                 <li>
-                                <x-input-label for="title" value="Pikkus" />
-                                {{ old('title', $player->height) }}
+                                    <span class="font-semibold">Vabavisked:</span> {{ number_format($freeThrowPercentage, 2) }}%
+                                </li>
+                                <li>
+                                    <span class="font-semibold">Mängud:</span> {{ $gamesPlayed }}
                                 </li>
                             </ul>
-                            <div class="p-6 shadow-lg rounded-lg transition duration-300 focus:outline-none bg-zinc-100/80 hover:bg-zinc-100/95 hover:text-orange-500 focus-visible:ring-orange-500">
-                                <h2 class="text-zinc-900 hover:text-zinc-900 font-semibold p-2">
-                                    Statistika:
-                                </h2>
-                                <table class="w-full">
-                                    <thead>
-                                        <tr class="text-orange-600">
-                                            <th>Vastane</th>
-                                            <th>Särgi nr</th>
-                                            <th>Minutid</th>
-                                            <th>3-p</th>
-                                            <th>vv-v</th>
-                                            <th>vv-s</th>
-                                            <th>Vead</th>
-                                            <th>Tehnilised</th>
-                                            <th>Ebasportlikud</th>
-                                            <th>Punktid</th>
+                        </div>
+                        <div class="p-6 shadow-lg rounded-lg transition duration-300 focus:outline-none bg-zinc-100/80 hover:bg-zinc-100/95 hover:text-orange-500 focus-visible:ring-orange-500">
+                            <h2 class="text-lg font-semibold text-orange-600 mb-4">
+                                Statistika
+                            </h2>
+                            <table class="w-full">
+                                <thead>
+                                    <tr class="text-orange-600">
+                                        <th>Vastane</th>
+                                        <th>Särgi nr</th>
+                                        <th>Minutid</th>
+                                        <th>3-p</th>
+                                        <th>vv-v</th>
+                                        <th>vv-s</th>
+                                        <th>Vead</th>
+                                        <th>Tehnilised</th>
+                                        <th>Ebasportlikud</th>
+                                        <th>Punktid</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($statistics as $stat)
+                                        <tr class="border-t justify-between text-zinc-900 items-center transition duration-300 ease-in-out text-center hover:text-orange-500 hover:bg-gray-200">
+                                            <td>
+                                                @if ($stat->schedule->team1_id != $stat->team_id)
+                                                    {{ $stat->schedule->team1->team_name }}
+                                                @else
+                                                    {{ $stat->schedule->team2->team_name }}
+                                                @endif
+                                            </td>
+                                            <td>{{ $stat->game_jersey_nr }}</td>
+                                            <td>{{ $stat->played }}</td>
+                                            <td>{{ $stat->{'3-p'} }}</td>
+                                            <td>{{ $stat->free_t }}</td>
+                                            <td>{{ $stat->free_m }}</td>
+                                            <td>{{ $stat->fouls }}</td>
+                                            <td>{{ $stat->techincals }}</td>
+                                            <td>{{ $stat->unsportsman }}</td>
+                                            <td>{{ $stat->points }}</td>
                                         </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($statistics as $stat)
-                                            <tr class="border-t justify-between text-zinc-900 items-center transition duration-300 ease-in-out text-center hover:text-orange-500 hover:bg-gray-200">
-                                                <td>
-                                                    @if ($stat->schedule->team1_id != $stat->team_id)
-                                                        {{ $stat->schedule->team1->team_name }}
-                                                    @else
-                                                        {{ $stat->schedule->team2->team_name }}
-                                                    @endif
-                                                </td>
-                                                <td>{{ $stat->game_jersey_nr }}</td>
-                                                <td>{{ $stat->played }}</td>
-                                                <td>{{ $stat->{'3-p'} }}</td>
-                                                <td>{{ $stat->free_t }}</td>
-                                                <td>{{ $stat->free_m }}</td>
-                                                <td>{{ $stat->fouls }}</td>
-                                                <td>{{ $stat->techincals }}</td>
-                                                <td>{{ $stat->unsportsman }}</td>
-                                                <td>{{ $stat->points }}</td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="mt-4 space-x-2">
-                                <a href="{{ route('players.index') }}">{{ __('Tagasi') }}</a>
-                            </div>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="mt-4 space-x-2">
+                            <a href="{{ route('players.index') }}">{{ __('Tagasi') }}</a>
                         </div>
                     </div>
                 </div>
             </div>
-        </x-app-layout>
-        @else
+        </div>
+    </x-app-layout>
+    @else
     <!DOCTYPE html>
     <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
         <head>
@@ -208,9 +226,35 @@
                             {{ old('title', $player->height) }}
                         </div>
                     </div>
+                    <div class="p-6 mb-6 mt-6 shadow-lg rounded-lg transition duration-300 focus:outline-none bg-zinc-100/80 hover:bg-zinc-100/95 focus-visible:ring-orange-500">
+                        <h2 class="text-lg font-semibold text-orange-600 mb-4">Mängija keskmised</h2>
+                        <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 pb-6">
+                            <li>
+                                <span class="font-semibold">Punktid:</span> {{ number_format($averagePoints, 2) }}
+                            </li>
+                            <li>
+                                <span class="font-semibold">Kolmesed:</span> {{ number_format($averageThreeP, 2) }}
+                            </li>
+                            <li>
+                                <span class="font-semibold">Vead:</span> {{ number_format($averageFouls, 2) }}
+                            </li>
+                            <li>
+                                <span class="font-semibold">Tehnilised:</span> {{ number_format($averageTech, 2) }}
+                            </li>
+                            <li>
+                                <span class="font-semibold">Ebasportlikud:</span> {{ number_format($averageUnspo, 2) }}
+                            </li>
+                            <li>
+                                <span class="font-semibold">Vabavisked:</span> {{ number_format($freeThrowPercentage, 2) }}%
+                            </li>
+                            <li>
+                                <span class="font-semibold">Mängud:</span> {{ $gamesPlayed }}
+                            </li>
+                        </ul>
+                    </div>
                     <div>
                         <div class="p-6 shadow-lg rounded-lg transition duration-300 focus:outline-none bg-zinc-100/80 hover:bg-zinc-100/95 hover:text-orange-500 focus-visible:ring-orange-500">
-                            <h2 class="text-zinc-900 hover:text-zinc-900 font-semibold p-2">Statistika:</h2>
+                            <h2 class="text-lg font-semibold text-orange-600 mb-4">Statistika</h2>
                             <table class="w-full">
                                 <thead>
                                     <tr class="text-orange-600">

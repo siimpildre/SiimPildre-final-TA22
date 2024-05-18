@@ -40,16 +40,33 @@
                             <table class="relative w-full">
                                 <thead class="bg-neutral-100 text-left">
                                     <tr>
-                                        <th>Eesnimi</th>
-                                        <th>Perekonnanimi</th>
+                                        <th>Nimi</th>
                                         <th>Särgi number</th>
-                                        <th>Positsiooni number</th>
-                                        <th>Sünniaeg</th>
-                                        <th>Pikkus</th>
+                                        <th class="hidden lg:table-cell">Positsiooni number</th>
+                                        <th class="hidden lg:table-cell">Sünniaeg</th>
+                                        <th class="hidden md:table-cell lg:table-cell">Pikkus</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-
+                                @foreach ($players as $player)
+                                    <tr onclick="window.location='{{ route('players.show', $player->id) }}';" style="cursor:pointer;" class="border-t justify-between text-zinc-900 items-center transition duration-300 ease-in-out hover:text-orange-500 hover:bg-gray-200">
+                                        <td>
+                                            {{ $player->first_name }} {{ $player->last_name }}
+                                        </td>
+                                        <td>
+                                            {{ $player->jersey_nr }}
+                                        </td>
+                                        <td class="hidden lg:table-cell">
+                                            {{ $player->pos_nr }}
+                                        </td>
+                                        <td class="hidden lg:table-cell">
+                                            {{ \Carbon\Carbon::parse($player->birth_date)->format('d.m.Y') }}
+                                        </td>
+                                        <td class="hidden md:table-cell lg:table-cell">
+                                            {{ $player->height }}
+                                        </td>
+                                    </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>

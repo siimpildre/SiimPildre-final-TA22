@@ -81,12 +81,8 @@
                         </thead>
                         <tbody>
                             @foreach ($teams as $team)
-                            <tr class="border-b justify-between items-center text-left transition duration-300 ease-in-out hover:bg-neutral-100">   
-                                <td>
-                                    <a href="{{ route('teams.show', $team) }}">
-                                        {{ $team->team_name }}
-                                    </a>
-                                </td>
+                            <tr onclick="window.location='{{ route('teams.show', $team->id) }}';" style="cursor:pointer;" class="border-b justify-between items-center text-left transition duration-300 ease-in-out hover:bg-neutral-100">   
+                                <td>{{ $team->team_name }}</td>
                                 <td>{{ $team->short_name }}</td>
                                 <td class="hidden lg:table-cell">{{ $team->coach }}</td>
                                 <td class="hidden lg:table-cell">{{ $team->contact_nr }}</td>

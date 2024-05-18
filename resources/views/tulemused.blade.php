@@ -97,11 +97,11 @@
                                 $team1Points = $schedule->statistics()->where('team_id', $schedule->team1_id)->sum('points');
                                 $team2Points = $schedule->statistics()->where('team_id', $schedule->team2_id)->sum('points');
                             @endphp
-                            <tr class="border-t justify-between text-zinc-900 items-center transition duration-300 ease-in-out text-center hover:text-orange-500 hover:bg-gray-200">
+                            <tr onclick="window.location='{{ route('schedules.show', $schedule->id) }}';" style="cursor:pointer;" class="border-t justify-between text-zinc-900 items-center transition duration-300 ease-in-out text-center hover:text-orange-500 hover:bg-gray-200">
                                 <td>{{ $schedule->team1->team_name ?? 'Meeskonda ei leitud' }}</td>
                                 <td>{{ $team1Points > 0 ? $team1Points : '' }}</td>
                                 <td>:</td>
-                                <td>{{ $team2Points > 0 ? $team1Points : '' }}</td>
+                                <td>{{ $team2Points > 0 ? $team2Points : '' }}</td>
                                 <td>{{ $schedule->team2->team_name ?? 'Meeskonda ei leitud' }}</td>
                                 <td class="hidden md:table-cell lg:table-cell">{{ date('d.m.Y', strtotime($schedule->date)) }}</td>
                                 <td class="hidden sm:table-cell md:table-cell lg:table-cell">{{ date('H:i', strtotime($schedule->time)) }}</td>

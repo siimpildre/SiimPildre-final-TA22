@@ -79,11 +79,15 @@ class ScheduleController extends Controller
      */
     public function show(Schedule $schedule): View
     {
+        // Fetch the team names using the team IDs from the schedule
+        $team1 = Team::findOrFail($schedule->team1_id);
+        $team2 = Team::findOrFail($schedule->team2_id);
+
+        // Pass the schedule and team names to the view
         return view('schedules.show', [
-
             'schedule' => $schedule,
-            'team' => $schedule -> teams
-
+            'team1_name' => $team1->team_name,
+            'team2_name' => $team2->team_name,
         ]);
     }
 

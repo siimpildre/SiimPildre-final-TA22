@@ -75,7 +75,7 @@
                             <th>Nimi</th>
                             <th>Meeskond</th>
                             <th>Särgi number</th>
-                            <th class="hidden lg:table-cell">Positsiooni number</th>
+                            <th class="hidden lg:table-cell">Positsioon</th>
                             <th class="hidden lg:table-cell">Sünniaeg</th>
                             <th class="hidden lg:table-cell">Pikkus</th>
                         </tr>

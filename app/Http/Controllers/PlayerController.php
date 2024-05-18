@@ -68,9 +68,34 @@ class PlayerController extends Controller
     {
         // Fetch player's statistics
         $statistics = $player->statistics;
-        
-        // Pass the player and their statistics to the view
-        return view('players.show', compact('player', 'statistics'));
+
+        // Calculate the averages
+        $averagePoints = $statistics->avg('points');
+        $averageThreeP = $statistics->avg('3-p');
+        $averageFouls = $statistics->avg('fouls');
+        $averageTech = $statistics->avg('techincals');
+        $averageUnspo = $statistics->avg('unsportsman');
+        $gamesPlayed = $statistics->count();
+
+        // Calculate the free throw percentage
+        $totalFreeThrowsMade = $statistics->sum('free_m');
+        $totalFreeThrowsThrown = $statistics->sum('free_t');
+        $freeThrowPercentage = $totalFreeThrowsThrown > 0 
+            ? ($totalFreeThrowsMade / $totalFreeThrowsThrown) * 100 
+            : 0;
+
+        // Pass data to the view
+        return view('players.show', [
+            'player' => $player,
+            'statistics' => $statistics,
+            'averagePoints' => $averagePoints,
+            'averageThreeP' => $averageThreeP,
+            'averageFouls' => $averageFouls,
+            'averageTech' => $averageTech,
+            'averageUnspo' => $averageUnspo,
+            'freeThrowPercentage' => $freeThrowPercentage,
+            'gamesPlayed' => $gamesPlayed,
+        ]);
     }
     
     /**
