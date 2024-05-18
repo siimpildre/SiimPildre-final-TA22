@@ -119,7 +119,9 @@
                         </div>
                     </div>
                     <div class="pt-6 lg:pt-12 space-x-2">
-                        <a class="hover:text-orange-500" href="{{ route('mangijad') }}">{{ __('Tagasi') }}</a>
+                        <a class="hover:text-orange-500" href="{{ url()->previous() }}">
+                            {{ __('Tagasi') }}
+                        </a>
                     </div>
                 </div>
             </main> 

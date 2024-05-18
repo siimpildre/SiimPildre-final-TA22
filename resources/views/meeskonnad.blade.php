@@ -52,7 +52,7 @@
             <div class="min-h-screen flex flex-col items-center">
                 <div class="w-full max-w-2xl px-6 md:max-w-4xl lg:max-w-7xl">
                     <div class="flex justify-between pt-4 pb-4">
-                        <a href="./" class="flex items-center">
+                        <a href="/" class="flex items-center">
                             <h3 class="logo rounded-md px-3 py-2 text-white/90">
                                 Saare Spordiselts 
                             </h3>
@@ -106,7 +106,9 @@
                     </table>
                 </div>
                 <div class="pt-6 lg:pt-12 space-x-2">
-                    <a class="hover:text-orange-500" href="{{ route('welcome') }}">{{ __('Tagasi') }}</a>
+                    <a class="hover:text-orange-500" href="{{ url()->previous() }}">
+                        {{ __('Tagasi') }}
+                    </a>
                 </div>
             </div>
         </main> 

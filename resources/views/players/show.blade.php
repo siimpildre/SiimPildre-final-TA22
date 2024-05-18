@@ -272,7 +272,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($statistics as $stat)
-                                        <tr class="border-t justify-between text-zinc-900 items-center transition duration-300 ease-in-out text-center hover:text-orange-500 hover:bg-gray-200">
+                                        <tr onclick="window.location='{{ route('schedules.show', $stat->schedule_id) }}';" style="cursor:pointer;" class="border-t justify-between text-zinc-900 items-center transition duration-300 ease-in-out text-center hover:text-orange-500 hover:bg-gray-200">
                                             <td>
                                                 @if ($stat->schedule->team1_id != $stat->team_id)
                                                     {{ $stat->schedule->team1->team_name }}
@@ -296,7 +296,9 @@
                         </div>
                     </div>
                     <div class="pt-6 lg:pt-12 space-x-2">
-                        <a class="hover:text-orange-500" href="{{ route('mangijad') }}">{{ __('Tagasi') }}</a>
+                        <a class="hover:text-orange-500" href="{{ url()->previous() }}">
+                            {{ __('Tagasi') }}
+                        </a>
                     </div>
                 </div>
             </main> 
